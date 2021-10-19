@@ -1,0 +1,30 @@
+body{
+    background: #778E9B;
+}
+
+.contenedor{
+    margin-top: 2rem;
+}
+.opcion, .opcion1{
+    background: #627A8F;
+    min-height: 40rem;
+   
+    padding: 2rem;
+}
+
+h2{
+    text-align: center;
+}
+
+.act{
+    margin-top: 7rem;
+}
+
+.input{
+    width: 50%;
+    display: inline;
+}
+
+.h3{
+    font-size: 1.75rem;
+}
