@@ -54,7 +54,7 @@ include_once("lib/funciones.php");
 
 
 <?php
-echo 
+echo hexa_aleatorio();
 ?>
 </body>
 </html>
