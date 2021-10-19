@@ -1,10 +1,15 @@
 <?php
 
+/* Listado de funciones del juego */
 
-function hexa_aleatorio()
+function hexa_aleatorio() /* Función que crea códigos hexadecimales de 5 caracteres */
 {
-    // 10000
-    // 1048576
-    $numero_ejemplo = 20000;
-    return dechex($numero_ejemplo);
+    $numero_ejemplo = rand(65536, 1048575);
+    return strtoupper(dechex($numero_ejemplo));
+}
+
+function session_code_user()
+{
+    $numero = rand(100, 999) . time();
+    return $numero;
 }

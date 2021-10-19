@@ -1,5 +1,15 @@
 <?php
-include_once("lib/funciones.php");
+require_once 'vendor/autoload.php';
+require_once('lib/db.php');
+require_once("lib/funciones.php");
+require_once("lib/config.php");
+
+require_once("Modelos/Participantes.php");
+require_once("Controladores/ParticipantesControlador.php");
+require_once("Modelos/Partidas.php");
+require_once("Controladores/PartidasControlador.php");
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,18 +22,37 @@ include_once("lib/funciones.php");
 </head>
 <body>
 
+<?php
+if(isset($_POST["nombre"]))
+{
+    $partida = new Partidas();
+    $partida->crearPartida();
+    $jugadores = new Participantes();
+    $jugadores->crearParticipante($_POST["nombre"]);
+}
+?>
     <div class="contenedor">
+        <?php
+        if(!isset($_SESSION["codigo"]))
+        {
+            ?>
         <form action="#" method="POST" enctype="multipart/form-data">
 
             <div>
-                <input type="text">
+                <input type="text" name="nombre" value="" placeholder="Nombre del usuario">
+            </div>
+            <div>
+                <input type="submit" value="Enviar">
             </div>
 
         </form>
+            <?php
+        }
+        ?>
     </div>
 
     <script>
-        function hola() {
+        function consultaAPI() {
 
             const data = new FormData();
             data.append('accion', 'SENASOFT');
@@ -38,7 +67,7 @@ include_once("lib/funciones.php");
                     if (data) {
                         return data[0]["nombre"]
                     } else {
-                        throw "Error en la llamada Ajax";
+                        throw "Error en consulta AJAX";
                     }
 
                 })
@@ -49,12 +78,9 @@ include_once("lib/funciones.php");
                     console.log(err);
                 });
         }
-        const Intervalo = setInterval("hola()", 5000)
+        const Intervalo = setInterval("consultaAPI()", 5000)
     </script>
 
 
-<?php
-echo hexa_aleatorio();
-?>
 </body>
 </html>
