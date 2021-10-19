@@ -1,7 +1,10 @@
-# ceaisenasoft2021
-Proyecto Web para SENASOFT 2021 - Modalidad Desarrollo Web
+# Proyecto Web para SENASOFT 2021
 
-Proyecto SENASOFT realizado por:
+Modalidad Desarrollo Web (Siigo)
+
+## Integrantes
 Angélica Giraldo
+
 Justin Velasquez
-John W. Martinez
+
+John W. Martínez
