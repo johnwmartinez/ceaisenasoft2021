@@ -9,6 +9,10 @@ require_once("../Modelos/Jugadores.php");
 require_once("../Controladores/JugadoresControlador.php");
 require_once("../Modelos/Partidas.php");
 require_once("../Controladores/PartidasControlador.php");
+require_once("../Modelos/Cartas.php");
+require_once("../Controladores/CartasControlador.php");
+require_once("../Modelos/PartidaSecreto.php");
+require_once("../Controladores/PartidaSecretoControlador.php");
 
 // Pintamos el archivo como salida JSON para consultas desde Javascript
 header('Content-Type: application/json');
@@ -23,11 +27,12 @@ if(isset($_POST["accion"])):
 
             /* Ingresamos un nuevo usuario al sistema */
             $jugadores = new Jugadores();
-            $jugadores->ingresarNuevoUsuario(
-                $post["nombre"],
-                $post["codigo"]
+            $salida = array(
+                $jugadores->ingresarNuevoUsuario(
+                    $post["nombre"],
+                    $post["codigo"]
+                )
             );
-            $salida = array(1);
             echo(json_encode($salida));
             
         break;

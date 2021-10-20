@@ -15,6 +15,10 @@ class Jugadores extends JugadoresModelo{
             $partida = new Partidas();
             $codigo = $partida->crearPartida(); /* Código de la nueva partida */
             $existePartida = true; 
+
+            /* Creamos las cartas de Partida secreto */
+            $partidaSecreto = new PartidaSecreto();
+            $partidaSecreto->crearPartidaSecreto($codigo);
         else:
             $partidas = new Partidas();
             $existePartida = $partidas->verSiPartidaExiste($codigo); /* Variable para saber si una partida existe */
@@ -23,9 +27,16 @@ class Jugadores extends JugadoresModelo{
         if($existePartida): /* Si la partida existe, continuamos el proceso creando el jugador */
             
             $this->crearJugador($nombre);
-            /* Metemos las cartas en secreto */
-            // Método cartas en secreto
+            /* Traemos el listado de todas las cartas disponibles */
+            $cartas = new Cartas();
+            $cartas_totales = $cartas->obtenerTodasLasCartas();
+            
+            /* Hay que eliminiar las cartas que ya tiene secreto */
+            /* Eliminar las cartas que ya se repartieron a usurios */
+            /* Agregar 4 cartas de entre las disponibles al usuario nuevo */
 
+        else:
+            return json_encode(array("error"));
         endif;
     }
 }
