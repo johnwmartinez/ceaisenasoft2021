@@ -113,18 +113,15 @@ if(isset($_GET["limpiar"]))
                         let pantalla_inicial = 0
 
                         // Codigo 100: Mostramos la pantalla inicial
-                        if(data.codigo == 100)
-                        {
+                        if(data.codigo == 100){
                             document.querySelector('.arena_pruebas').innerHTML = 'Mostramos pantalla inicial porque no tiene variable sesión creada'
                             pantalla_inicial = 1
                         }
-                        if(data.codigo == 100)
-                        {
+                        if(data.codigo == 100){
                             document.querySelector('.arena_pruebas').innerHTML = 'Mostramos pantalla inicial porque no tiene variable sesión creada'
                         }
                         const codigos_respuesta = [201, 202, 203] /* Códigos de respuestas de estado de partida */
-                        if(codigos_respuesta.includes(data.codigo))
-                        {
+                        if(codigos_respuesta.includes( data.codigo )){
                             document.querySelector('.arena_pruebas').innerHTML = data.mensaje
                         }
 
