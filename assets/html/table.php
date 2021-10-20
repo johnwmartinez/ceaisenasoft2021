@@ -37,6 +37,20 @@
                 <h2>Turno de: Juan</h2>
             </div>
             <!-- Fin Turnos -->
+            <!-- Ultima pregunta -->
+                <div class="col-md-6 pregunta">
+                    <div class="h2">
+                        <h2>Ultima pregunta:</h2>
+                        <h2>¿Pedro en el modulo nomina error 404?</h2>
+                    </div>
+                </div>
+            <!-- Fin Ultima pregunta -->
+            <!--lista -->
+            <div class="col-md-3 p-0" style="background-color: #d1c5a3">
+                <i class="fas fa-angle-double-right actiL" onclick=""></i>
+
+            </div>
+            <!-- lista -->
         </div>
     </div>
     <!-- Fin de la pagina -->

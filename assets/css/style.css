@@ -7,7 +7,6 @@ body{
 }
 .opcion, .opcion1, .contenido{
     background: #627A8F;
-    min-height: 40rem;
     
     padding: 2rem;
     border-radius: 10px;
@@ -123,4 +122,27 @@ h2{
     background-color: rgb(139, 78, 27);
     margin-top: -2rem;
     max-height: 4rem;
+    border-radius: 0px 0px 10px 10px;
+
+}
+
+.pregunta .h2{
+    background-color: #d1c5a3;
+    border-radius: 0px 0px 10px 10px;
+    margin-top: -2rem;
+
+}
+
+.actiL{
+    background-color: rgb(139, 78, 27);
+    border-radius: 0px 10px 10px 0px;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: -2rem;
+    
+}
+
+.padreJ{
+    max-height: 100px;
 }
