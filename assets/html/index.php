@@ -12,9 +12,9 @@
 <body>
     <div class="container contenedor">
         <div class="row">
-                <div class="col-5 opcion">
+                <div class="col-5 opcion elements">
                     <h2>Nuevo Juego</h2>
-                    <div class="container">
+                    <div class="container ab">
                     <div class="row form-group act">
                         <label for="nombre" class="col-12 col-md-4 h3">Nombre</label>
                         <div class="col-12 col-md-8">
@@ -22,31 +22,31 @@
                             <input  id="nombre" type="text" name="nombre" class="form-control">
                             <input id="submit1" type="submit" style="display:none">
                         </form>
-                        <label for="submit1" class="act">
-                            <img src="../img/play.png" alt="">
+                    </div>
+                        <label for="submit1" class="act container-img">
+                            <img src="../img/play.png" class="img" alt="">
                         </label>
-                        </div>
                     </div>
                 </div>
                 </div>
                 <div class="col-2"></div>
-                <div class="col-5 opcion1">
+                <div class="col-5 opcion1 elements">
                 <h2>Unirse a partida</h2>
-                    <div class="container">
-                        <div class="row form-group act">
-                            <form action="">
-                                <label for="nombre2" class="col-12 col-md-4 h3">Nombre</label>
-                                    <div class="col-12 col-md-8">
-                                        <input  id="nombre2" type="text" name="nombre" class="form-control">
+                    <div class="container ab">
+                        <div class="row form-group act act2">
+                            <label for="nombre2" class="col-12 col-md-4 h3">Nombre</label>
+                            <div class="col-12 col-md-8">
+                                        <form action="">
+                                        <input  id="nombre2" type="text" name="nombre" class="form-control ">
                                     </div>
                                 <label for="codigo" class="col-12 col-md-4 h3">Codigo</label>
                                     <div class="col-12 col-md-8"> 
-                                        <input  id="codigo" type="text" name="codigo" class="form-control">
+                                        <input  id="codigo" type="text" name="codigo" class="form-control ">
                                     </div>
                                 <input id="submit2" type="submit" style="display:none">
                             </form>
-                                <label for="submit2" class="act">
-                                    <img src="../img/play.png" alt="">
+                                <label for="submit2" class="act container-img">
+                                    <img src="../img/play.png" alt="" class="img">
                                 </label>
                         </div>
                      </div>
