@@ -5,11 +5,12 @@ body{
 .contenedor{
     margin-top: 2rem;
 }
-.opcion, .opcion1{
+.opcion, .opcion1, .contenido{
     background: #627A8F;
     min-height: 40rem;
     
     padding: 2rem;
+    border-radius: 10px;
 }
 
 h2{
@@ -42,5 +43,8 @@ h2{
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
   }
+
+.img{
+    cursor: pointer;
+}  
