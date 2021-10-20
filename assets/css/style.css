@@ -30,15 +30,6 @@ h2{
     font-size: 1.75rem;
 }
 
-.elements .ab{
-    opacity: 0;
-}
-
-.elements:hover .ab{
-    transition: 0.5s;
-    opacity: 1;
-}
-
 .container-img{
     display: flex;
     justify-content: center;
@@ -48,3 +39,88 @@ h2{
 .img{
     cursor: pointer;
 }  
+
+.jugadoresList{
+    background-color: rgb(92 100 157 / 57%);
+    border-radius: 10px;
+    padding: 0px 50px 50px;
+    display: table;
+}
+
+.foto{
+    height: 35px;
+    width: 35px;
+    border-radius: 20px;
+    margin-left: 5px;
+    margin:0px auto;
+}
+
+.letras{
+    font-size: 1.5rem;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.col-md-3 .jugador{
+    font-size: 1.3rem;
+}
+
+.jugador{
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.sobre{
+    z-index: 2;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 200px;
+    min-width: 400px;
+    background:#49618f;
+    border-radius: 10px;
+}
+
+.preloader {
+    width: 70px;
+    height: 70px;
+    border: 10px solid #eee;
+    border-top: 10px solid #666;
+    border-radius: 50%;
+    animation-name: girar;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: absolute;
+    display: grid;
+    left: calc(50% - 35px);
+    top: calc(50% - 35px);
+    
+  }
+  @keyframes girar {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+.padre{
+    position: relative;
+    margin-top: 12%;
+}  
+
+.errorX{
+    position: absolute;
+    display: grid;
+    left: calc(50% - 35px);
+    top: calc(50% - 35px);
+}
+
+.turno{
+    background-color: rgb(139, 78, 27);
+    margin-top: -2rem;
+    max-height: 4rem;
+}

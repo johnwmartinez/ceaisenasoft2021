@@ -12,13 +12,30 @@
 <body>  
     <div class="container contenedor">
         <div class="row contenido">
-                <div class="col-md-4">
+            <!-- Lista de jugadores -->
+                <div class="col-md-4 jugadoresList">
                     <h2>Jugadores 3/4</h2>
-                    
+                    <div class="row jugador">
+                        <div class="col-4 col-md-4 foto" style="background-color:orange">
+                        </div>
+                        <div class="col-8 col-md-8 letras" style="color:orange">
+                            Juanito Perez
+                        </div>
+                    </div>
+                    <div class="row jugador">
+                        <div class="col-4 col-md-4 foto" style="background-color:red">
+                        </div>
+                        <div class="col-8 col-md-8 letras">
+                            Raul Salinas
+                        </div>
+                    </div>
                 </div>
+            <!-- Fin lista de jugadores  -->
+            <!-- Inicio reglas -->
                 <div class="col-md-8">
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto corrupti esse cumque recusandae quidem autem repellendus pariatur totam iste omnis molestiae saepe aperiam tenetur voluptatum aliquid, voluptate quod officia nesciunt.
                 </div>
+            <!-- Fin reglas  -->
         </div>
     </div>
 </body>
