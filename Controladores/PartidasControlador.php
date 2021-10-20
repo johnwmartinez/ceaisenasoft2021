@@ -2,10 +2,17 @@
 
 class Partidas extends PartidasModelo{
 
-    function __construct()
+    public function __construct()
     {
         
     }
 
+    public function verSiPartidaExiste($codigo) /* Verificamos si la partida existe */
+    {
+        $dataPartida = $this->getPartidaPorCodigo($codigo);
+        if(isset($dataPartida["id_partida"]))
+            return true;
+        return false;
+    }
    
 }

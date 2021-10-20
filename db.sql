@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump 
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-10-2021 a las 16:36:07
+-- Tiempo de generación: 20-10-2021 a las 19:06:24
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 7.3.27
 
@@ -20,8 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `cartas`
 --
-
-DROP TABLE IF EXISTS `cartas`;
+DROP TABLE IF EXISTS cartas;
 CREATE TABLE `cartas` (
   `idcarta` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
@@ -58,7 +57,7 @@ INSERT INTO `cartas` (`idcarta`, `nombre`, `categoria`) VALUES
 --
 -- Estructura de tabla para la tabla `jugadores`
 --
-DROP TABLE IF EXISTS `jugadores`;
+DROP TABLE IF EXISTS jugadores;
 CREATE TABLE `jugadores` (
   `id_jugador` int(11) NOT NULL,
   `codigo` varchar(100) DEFAULT NULL,
@@ -67,12 +66,21 @@ CREATE TABLE `jugadores` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `jugadores`
+--
+
+INSERT INTO `jugadores` (`id_jugador`, `codigo`, `nombre`, `created_at`, `updated_at`) VALUES
+(5, '9581634749462', 'Pepito Sanchez', '2021-10-20 17:04:22', '2021-10-20 19:10:04'),
+(6, '2911634749558', 'John Martinez', '2021-10-20 17:05:58', '2021-10-20 19:10:05');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `partidas`
 --
-DROP TABLE IF EXISTS `partidas`;
+
+DROP TABLE IF EXISTS partidas;
 CREATE TABLE `partidas` (
   `id_partida` int(11) NOT NULL,
   `codigo` varchar(5) NOT NULL COMMENT 'Código hexadecimal que indifica la partida',
@@ -80,12 +88,19 @@ CREATE TABLE `partidas` (
   `estado` int(11) DEFAULT 0 COMMENT '0:Pendiente por comenzar, 1:Activa, 2:Finalizada'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `partidas`
+--
+
+INSERT INTO `partidas` (`id_partida`, `codigo`, `turno`, `estado`) VALUES
+(10, '22993', 1, 0);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `partidas_preguntas`
 --
-DROP TABLE IF EXISTS `partidas_preguntas`;
+DROP TABLE IF EXISTS partidas_preguntas;
 CREATE TABLE `partidas_preguntas` (
   `idpartidapregunta` int(11) NOT NULL,
   `id_partida` int(11) NOT NULL,
@@ -101,7 +116,7 @@ CREATE TABLE `partidas_preguntas` (
 --
 -- Estructura de tabla para la tabla `partidas_secreto`
 --
-DROP TABLE IF EXISTS `partidas_secreto`;
+DROP TABLE IF EXISTS partidas_secreto;
 CREATE TABLE `partidas_secreto` (
   `id_partida_secreto` int(11) NOT NULL,
   `id_partida` int(11) NOT NULL,
@@ -115,7 +130,7 @@ CREATE TABLE `partidas_secreto` (
 --
 -- Estructura de tabla para la tabla `rel_partida_jugador_cartas`
 --
-DROP TABLE IF EXISTS `rel_partida_jugador_cartas`;
+DROP TABLE IF EXISTS rel_partida_jugador_cartas;
 CREATE TABLE `rel_partida_jugador_cartas` (
   `id_partida_jugador_cartas` int(11) NOT NULL,
   `id_partida` int(11) NOT NULL,
@@ -133,7 +148,7 @@ CREATE TABLE `rel_partida_jugador_cartas` (
 --
 -- Estructura de tabla para la tabla `rel_partida_jugador_tablas`
 --
-DROP TABLE IF EXISTS `rel_partida_jugador_tablas`;
+DROP TABLE IF EXISTS rel_partida_jugador_tablas;
 CREATE TABLE `rel_partida_jugador_tablas` (
   `id_partida_jugador_carta` int(11) NOT NULL,
   `id_partida` int(11) NOT NULL,
@@ -162,18 +177,19 @@ ALTER TABLE `jugadores`
 -- Indices de la tabla `partidas`
 --
 ALTER TABLE `partidas`
-  ADD PRIMARY KEY (`id_partida`);
+  ADD PRIMARY KEY (`id_partida`),
+  ADD UNIQUE KEY `codigo` (`codigo`);
 
 --
 -- Indices de la tabla `partidas_preguntas`
 --
 ALTER TABLE `partidas_preguntas`
   ADD PRIMARY KEY (`idpartidapregunta`),
-  ADD KEY `partidas_preguntas_FK` (`id_partida`),
   ADD KEY `partidas_preguntas_FK_1` (`id_jugador`),
   ADD KEY `partidas_preguntas_FK_2` (`idcarta1`),
   ADD KEY `partidas_preguntas_FK_3` (`idcarta2`),
-  ADD KEY `partidas_preguntas_FK_4` (`idcarta3`);
+  ADD KEY `partidas_preguntas_FK_4` (`idcarta3`),
+  ADD KEY `partidas_preguntas_FK` (`id_partida`);
 
 --
 -- Indices de la tabla `partidas_secreto`
@@ -221,13 +237,13 @@ ALTER TABLE `cartas`
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `partidas`
 --
 ALTER TABLE `partidas`
-  MODIFY `id_partida` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_partida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `partidas_preguntas`
