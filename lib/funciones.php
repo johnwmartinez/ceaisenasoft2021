@@ -8,7 +8,7 @@ function hexa_aleatorio() /* Función que crea códigos hexadecimales de 5 carac
     return strtoupper(dechex($numero_ejemplo));
 }
 
-function session_code_user()
+function session_code_user() /* Esta función crea un código único para cada usuario */
 {
     $numero = rand(100, 999) . time();
     return $numero;

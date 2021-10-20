@@ -27,11 +27,10 @@ if(isset($_GET["limpiar"]))
 {
     unset($_SESSION["codigo"]);
 }
-if(isset($_POST["nombre"]))
-{
-
-}
 ?>
+<div class="logo">
+    <img src="assets/img/logo.png" alt="Logo" style="width:250px; height:90px; object-fit:cover;">
+</div>
     <div class="contenedor" style="background:#eee;">
         <?php
         // if(!isset($_SESSION["codigo"]))
@@ -68,12 +67,15 @@ if(isset($_POST["nombre"]))
         </form>
     </div>
 
+    <div class="arena_pruebas">
+        Aquí vamos a imprimir como van las pruebas de mi aplicativo
+    </div>
+
     <script>
         function consultaAPI() {
 
             const data = new FormData();
-            data.append('accion', 'SENASOFT');
-            data.append('idPrueba', 'SENASOFT');
+            data.append('processing', 'SENASOFT');
 
             fetch('api/', {
                     method: 'POST',
@@ -82,7 +84,7 @@ if(isset($_POST["nombre"]))
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        return data[0]["nombre"]
+                        console.log(data)
                     } else {
                         throw "Error en consulta AJAX";
                     }
@@ -95,8 +97,8 @@ if(isset($_POST["nombre"]))
                     console.log(err);
                 });
         }
-        //const Intervalo = setInterval("consultaAPI()", 5000)
-        //consultaAPI()
+        const Intervalo = setInterval("consultaAPI()", 5000)
+        consultaAPI()
 
         function ingresarNuevoUsuario(datos)
         {
@@ -120,6 +122,7 @@ if(isset($_POST["nombre"]))
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
+                        /* Analizamos el regreso de data para saber en qué pantalla estamos */
                         return data
                     } else {
                         throw "Error en consulta AJAX";
@@ -129,7 +132,7 @@ if(isset($_POST["nombre"]))
                 .then(function(texto) {
                     console.log(texto);
                 })
-                .catch(function(err) {
+                .catch(function(err) { /* Capturo el error, si lo hay */
                     console.log(err);
                 });
         }
