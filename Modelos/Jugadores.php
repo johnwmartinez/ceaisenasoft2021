@@ -17,7 +17,7 @@ class JugadoresModelo{
         $rel = $DB->query($query, array(
             $_SESSION["codigo"],
             $nombre,
-            date("Y-m-d H:m:i")
+            time()
         ));
         // session_code_userr
     }

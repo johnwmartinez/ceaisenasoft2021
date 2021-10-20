@@ -20,26 +20,39 @@ header('Content-Type: application/json');
 /* Definir procesos que de forma asíncrona serán consultados */
 if(isset($_POST["accion"])):
     $post = $_POST;
-    $post["codigo"] = isset($post["codigo"]) ? $post["codigo"] : NULL;
-    switch($post["accion"])
-    {
+    $post["codigo"] = isset($post["codigo"]) ? $post["codigo"] : NULL;  /* Definimos si código llega desdee JS */
+    switch($post["accion"]):
+    
         case "ingresarNuevoUsuario":
 
             /* Ingresamos un nuevo usuario al sistema */
             $jugadores = new Jugadores();
             $salida = array(
                 $jugadores->ingresarNuevoUsuario(
-                    $post["nombre"],
-                    $post["codigo"]
+                    $post["nombre"],  /* nombre del jugador */
+                    $post["codigo"]   /* código del jugador */
                 )
             );
             echo(json_encode($salida));
-            
         break;
-    }
-else:
-    $query = "SELECT * FROM jugadores WHERE created_at > ? ";
-    $salida = $DB->query($query, array('2020-10-20 00:00:00'));
-    echo(json_encode($salida));
+    endswitch;
 endif;
 
+
+if(isset($_POST["processing"])):
+    $salida = array();
+    if($_POST["processing"] == 'SENASOFT'):
+        /* A continuación viene el algoritmo que procesará el 'real time' de la aplicación 
+        Disclaimer: sabemos que la app no es Real Time como tal, solo engaño al navegador para creerlo */
+        if(isset($_SESSION["codigo"])):
+            /* Usuario que ya está asignado a una partida */
+        else:
+            /* El usuario no está asignado a una partida */
+            $salida = array(
+                "codigo" => 100, /**/
+                "mensaje" => "",
+            );
+        endif;
+        echo(json_encode($salida));
+    endif; // == SENASOFT
+endif; // isset processing
