@@ -1,6 +1,6 @@
 <?php
 
-class ParticipantesModelo{
+class JugadoresModelo{
 
     // Constructor del Modelo
     function __construct()
@@ -8,7 +8,7 @@ class ParticipantesModelo{
 
     }
 
-    function crearParticipante($nombre)
+    function crearJugador($nombre)
     {
         global $DB;
         $_SESSION["codigo"] = session_code_user();

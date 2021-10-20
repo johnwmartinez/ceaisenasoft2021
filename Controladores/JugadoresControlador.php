@@ -1,6 +1,6 @@
 <?php
 
-class Participantes extends ParticipantesModelo{
+class Jugadores extends JugadoresModelo{
 
     function __construct()
     {
