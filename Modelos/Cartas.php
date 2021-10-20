@@ -22,6 +22,6 @@ class CartasModelo{
         $query = " SELECT * FROM cartas WHERE categoria = ?";
         $rel = $DB->query($query, array($categoria));
         return $rel;
-    }
+    }   
 
 }

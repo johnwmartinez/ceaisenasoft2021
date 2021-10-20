@@ -43,5 +43,13 @@ class PartidaSecretoModelo{
         
     }
 
+    public function consultarCartasPartida($codigo){
+        global $DB;
+
+        $query = "SELECT * FROM partidas_secreto WHERE id_partida =  (SELECT id_partida FROM partidas WHERE codigo LIKE ?) ";
+        $res = $DB->query($query, array( $codigo )); 
+        return $res;
+    }
+
 
 }
