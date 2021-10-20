@@ -23,6 +23,10 @@ require_once("Controladores/PartidasControlador.php");
 <body>
 
 <?php
+if(isset($_GET["limpiar"]))
+{
+    unset($_SESSION["codigo"]);
+}
 if(isset($_POST["nombre"]))
 {
     $partida = new Partidas();
