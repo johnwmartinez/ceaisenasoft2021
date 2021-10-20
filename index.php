@@ -47,6 +47,8 @@ if(isset($_POST["nombre"]))
 
         </form>
             <?php
+        }else{
+            var_dump($_SESSION["codigo"]);
         }
         ?>
     </div>

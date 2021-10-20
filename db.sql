@@ -62,6 +62,7 @@ DROP TABLE IF EXISTS `jugadores`;
 CREATE TABLE `jugadores` (
   `id_jugador` int(11) NOT NULL,
   `codigo` varchar(100) DEFAULT NULL,
+  `nombre` varchar(150) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
