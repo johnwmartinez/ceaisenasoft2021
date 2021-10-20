@@ -27,7 +27,6 @@ class JugadoresModelo{
     public function getJugadorByCodigo($codigo){
 
         global $DB;
-
         $query = "SELECT * FROM  jugadores WHERE codigo = ?";
         $rel = $DB->query($query, array($codigo));
         return $rel;

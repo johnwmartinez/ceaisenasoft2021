@@ -52,25 +52,22 @@ class Jugadores extends JugadoresModelo{
             unset($total_cartas[array_search($carta2, $total_cartas)]);
             unset($total_cartas[array_search($carta3, $total_cartas)]);
 
+           
 
-            /* Eliminar las cartas que ya se repartieron a usuarios en esa partida*/
+            /*Consulto si existen cartas en la partida*/ 
             $partidaJugadorCartas = new PartidaJugadorCartas();
             $cartasPartida = $partidaJugadorCartas->consultarCartasPartida($codigo);
 
-            return json_encode(array($total_cartas));
-
             /*Si no existen cartas para ese jugador entonces se reparten */
             /*Si ya existen cartas para esa partida se eliminan de las cartas totales*/
-            /* Agregar 4 cartas de entre las disponibles al usuario nuevo */
-            /*$partidaJugadorCartas = new PartidaJugadorCartas();
-            if(count($cartasPartida) < 0):
-                getJugadorbyCodigo(codigoJugador)
-                //$partidaJugadorCartas->repartirCartasJugador($codigo);
-            
-            
+            /*Agregar 4 cartas de entre las disponibles al usuario nuevo */
+
+            if(count($cartasPartida) <= 0):
+                $jugadorRegistro = $this->getJugadorbyCodigo($codigoJugador); /*Obtengo el registro del jugador por el código del mismo*/
+                $partidaJugadorCartas->repartirCartasJugador($codigo, $jugadorRegistro[0]["id_jugador"], $total_cartas);
             else: 
                                 
-            endif;*/
+            endif;
             
 
 
