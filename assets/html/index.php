@@ -24,7 +24,7 @@
                         </form>
                     </div>
                         <label for="submit1" class="act container-img">
-                            <img src="../img/play.png" alt="">
+                            <img src="../img/play.png" class="img" alt="">
                         </label>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                                 <input id="submit2" type="submit" style="display:none">
                             </form>
                                 <label for="submit2" class="act container-img">
-                                    <img src="../img/play.png" alt="">
+                                    <img src="../img/play.png" alt="" class="img">
                                 </label>
                         </div>
                      </div>
