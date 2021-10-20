@@ -37,40 +37,44 @@ if(isset($_GET["limpiar"]))
 <div class="logo">
     <img src="assets/img/logo.png" alt="Logo" style="width:250px; height:90px; object-fit:cover;">
 </div>
-    <div class="contenedor" style="background:#eee;">
-        <?php
-        // if(!isset($_SESSION["codigo"]))
-        
-            ?>
-        <form action="#" method="POST" enctype="multipart/form-data" class="formAcceso">
-            <h2>Crear nueva partida</h2>
-            <div>
-                <input type="text" name="nombre" value="" placeholder="Nombre del usuario" required>
-            </div>
-            <div>
-                <input type="submit" value="Enviar">
-            </div>
 
-        </form>
+    <div class="creacionPartidas">
+
+        <div class="contenedor" style="background:#eee;">
             <?php
-       
-        ?>
-    </div>
-
-    <div class="contenedor" style="background:#ddd;">
-        <form action="#" method="POST" enctype="multipart/form-data" class="formAcceso">
-            <h2>Ingresar a partida</h2>
-            <div>
-                <input type="text" name="codigo" value="" maxlength="5" placeholder="Código de partida" pattern="^[A-Fa-f0-9]+$" required>
-            </div>
-            <div>
-                <input type="text" name="nombre" value="" placeholder="Nombre del usuario" required>
-            </div>
-            <div>
-                <input type="submit" value="Enviar">
-            </div>
-
-        </form>
+            // if(!isset($_SESSION["codigo"]))
+            
+                ?>
+            <form action="#" method="POST" enctype="multipart/form-data" class="formAcceso">
+                <h2>Crear nueva partida</h2>
+                <div>
+                    <input type="text" name="nombre" value="" placeholder="Nombre del usuario" required>
+                </div>
+                <div>
+                    <input type="submit" value="Enviar">
+                </div>
+    
+            </form>
+                <?php
+           
+            ?>
+        </div>
+    
+        <div class="contenedor" style="background:#ddd;">
+            <form action="#" method="POST" enctype="multipart/form-data" class="formAcceso">
+                <h2>Ingresar a partida</h2>
+                <div>
+                    <input type="text" name="codigo" value="" maxlength="5" placeholder="Código de partida" pattern="^[A-Fa-f0-9]+$" required>
+                </div>
+                <div>
+                    <input type="text" name="nombre" value="" placeholder="Nombre del usuario" required>
+                </div>
+                <div>
+                    <input type="submit" value="Enviar">
+                </div>
+    
+            </form>
+        </div>
     </div>
 
     <div class="arena_pruebas">
@@ -78,6 +82,20 @@ if(isset($_GET["limpiar"]))
     </div>
 
     <script>
+        function mostrar_esconder(clase, accion){
+            let action = (accion == 'mostrar') ? 'block' : 'none'
+            document.querySelector(clase).style.display = action
+        }
+
+        function estructuraFrontend( conf )
+        {
+            /* Módulo 1: Pantalla inicial */
+            if(conf.pantalla_inicial == 1)
+                mostrar_esconder('.creacionPartidas', 'mostrar')
+            else
+                mostrar_esconder('.creacionPartidas', 'esconder')
+        
+        }
         function consultaAPI() {
 
             const data = new FormData();
@@ -90,16 +108,32 @@ if(isset($_GET["limpiar"]))
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        // console.log(data)
+                        
+                        // Variables de diseño
+                        let pantalla_inicial = 0
+
                         // Codigo 100: Mostramos la pantalla inicial
                         if(data.codigo == 100)
                         {
                             document.querySelector('.arena_pruebas').innerHTML = 'Mostramos pantalla inicial porque no tiene variable sesión creada'
+                            pantalla_inicial = 1
                         }
-                        if(data.codigo == 999)
+                        if(data.codigo == 100)
                         {
-                            document.querySelector('.arena_pruebas').innerHTML = 'Significa que vamos bien'
+                            document.querySelector('.arena_pruebas').innerHTML = 'Mostramos pantalla inicial porque no tiene variable sesión creada'
                         }
+                        const codigos_respuesta = [201, 202, 203] /* Códigos de respuestas de estado de partida */
+                        if(codigos_respuesta.includes(data.codigo))
+                        {
+                            document.querySelector('.arena_pruebas').innerHTML = data.mensaje
+                        }
+
+                        /* Cambios de diseño */
+                        let salidaDiseno = {
+                            pantalla_inicial: pantalla_inicial,
+                        };
+                        estructuraFrontend(salidaDiseno)
+
                     } else {
                         throw "Error en consulta AJAX";
                     }
@@ -114,6 +148,7 @@ if(isset($_GET["limpiar"]))
         }
         const Intervalo = setInterval("consultaAPI()", 5000)
         consultaAPI()  // Inicializamos la llamada a la función que se va a ejecutar cada 5 segundos
+
 
         function ingresarNuevoUsuario(datos)
         {

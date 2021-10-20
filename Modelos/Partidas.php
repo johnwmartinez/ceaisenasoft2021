@@ -30,4 +30,14 @@ class PartidasModelo{
         return 0;
     }
 
+    public function getPartidaPorCodigoUsuario($codigo) /* Traemos toda la info de una partida por código */
+    {
+
+        global $DB;
+        $query = " SELECT codigo FROM partidas WHERE id_partida = (SELECT id_partida FROM rel_partida_jugador_cartas WHERE id_jugador = ( SELECT id_jugador FROM jugadores WHERE codigo LIKE ? )) ";
+        $res = $DB->query($query, array( $codigo ));
+        return $this->getPartidaPorCodigo($res[0]["codigo"]);
+        
+    }
+
 }

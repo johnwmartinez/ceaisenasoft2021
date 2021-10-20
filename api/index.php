@@ -49,21 +49,49 @@ if(isset($_POST["processing"])):
 
         /* Creamos los objetos */
         $jugadores = new Jugadores();
+        $partidas = new Partidas();
 
         /* Empezamos la lógica} */
         if(isset($_SESSION["codigo"])):
-            $codigo = $_SESSION["codigo"];
+            $codigo = $_SESSION["codigo"];  /* Código del USUARIO */
             /* Usuario que ya está asignado a una partida */
             $jugadores->updated_atTime($codigo); /* Actualizamos el campo jugadores:updated_at */
+            /* Validamos qué partida es la que el jugador está participando */
+            $partidaData = $partidas->getPartidaPorCodigoUsuario($codigo); /* La Data de la partida */
+            
+            switch($partidaData["estado"]):
+                case 0:
+                    // Pendiente;
+                    $salida = array(
+                        "codigo" => 201, /* Pendiente */
+                        "mensaje" => "Pendiente de arrancar el juego",
+                    );
+                break;
+                case 2:
+                    // Finalizada;
+                    $salida = array(
+                        "codigo" => 203, /* Partida finalizada */
+                        "mensaje" => "Partida finalizada",
+                    );
+                break;
+                case 1:
+                    // Activa;
+                    $salida = array(
+                        "codigo" => 202, /* Partida activa */
+                        "mensaje" => "Partida en progreso...",
+                    );
+                break;
+                default:
+                    $salida = array(
+                        "codigo" => 999, /**/
+                        "mensaje" => "Código temporal de pruebas. Es que todo va ok.",
+                    );
+            endswitch;
 
-            $salida = array(
-                "codigo" => 999, /**/
-                "mensaje" => "Código temporal de pruebas. Es que todo va ok.",
-            );
         else:
             /* El usuario no está asignado a una partida */
             $salida = array(
-                "codigo" => 100, /**/
+                "codigo" => 100, /* No ha ingresado */
                 "mensaje" => "",
             );
         endif;
