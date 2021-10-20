@@ -84,21 +84,30 @@ if(isset($_GET["limpiar"]))
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        console.log(data)
+                        // console.log(data)
+                        // Codigo 100: Mostramos la pantalla inicial
+                        if(data.codigo == 100)
+                        {
+                            document.querySelector('.arena_pruebas').innerHTML = 'Mostramos pantalla inicial porque no tiene variable sesión creada'
+                        }
+                        if(data.codigo == 999)
+                        {
+                            document.querySelector('.arena_pruebas').innerHTML = 'Significa que vamos bien'
+                        }
                     } else {
                         throw "Error en consulta AJAX";
                     }
 
                 })
                 .then(function(texto) {
-                    console.log(texto);
+                    //console.log(texto);
                 })
                 .catch(function(err) {
                     console.log(err);
                 });
         }
         const Intervalo = setInterval("consultaAPI()", 5000)
-        consultaAPI()
+        consultaAPI()  // Inicializamos la llamada a la función que se va a ejecutar cada 5 segundos
 
         function ingresarNuevoUsuario(datos)
         {

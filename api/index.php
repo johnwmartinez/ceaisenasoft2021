@@ -44,8 +44,20 @@ if(isset($_POST["processing"])):
     if($_POST["processing"] == 'SENASOFT'):
         /* A continuación viene el algoritmo que procesará el 'real time' de la aplicación 
         Disclaimer: sabemos que la app no es Real Time como tal, solo engaño al navegador para creerlo */
+
+        /* Creamos los objetos */
+        $jugadores = new Jugadores();
+
+        /* Empezamos la lógica} */
         if(isset($_SESSION["codigo"])):
+            $codigo = $_SESSION["codigo"];
             /* Usuario que ya está asignado a una partida */
+            $jugadores->updated_atTime($codigo); /* Actualizamos el campo jugadores:updated_at */
+
+            $salida = array(
+                "codigo" => 999, /**/
+                "mensaje" => "Código temporal de pruebas. Es que todo va ok.",
+            );
         else:
             /* El usuario no está asignado a una partida */
             $salida = array(
