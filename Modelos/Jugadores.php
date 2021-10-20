@@ -17,9 +17,21 @@ class JugadoresModelo{
         $rel = $DB->query($query, array(
             $_SESSION["codigo"],
             $nombre,
-            date("Y-m-d H:m:i")
+            time()
         ));
-        // session_code_userr
+    
+        return  $_SESSION["codigo"]; /*Devuelvo el codigo del jugador que fue creado*/
+
+    }
+
+    public function getJugadorByCodigo($codigo){
+
+        global $DB;
+
+        $query = "SELECT * FROM  jugadores WHERE codigo = ?";
+        $rel = $DB->query($query, array($codigo));
+        return $rel;
+    
     }
 
 
