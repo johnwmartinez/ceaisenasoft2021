@@ -4,8 +4,8 @@ require_once('lib/db.php');
 require_once("lib/funciones.php");
 require_once("lib/config.php");
 
-require_once("Modelos/Participantes.php");
-require_once("Controladores/ParticipantesControlador.php");
+require_once("Modelos/Jugadores.php");
+require_once("Controladores/JugadoresControlador.php");
 require_once("Modelos/Partidas.php");
 require_once("Controladores/PartidasControlador.php");
 
@@ -23,12 +23,16 @@ require_once("Controladores/PartidasControlador.php");
 <body>
 
 <?php
+if(isset($_GET["limpiar"]))
+{
+    unset($_SESSION["codigo"]);
+}
 if(isset($_POST["nombre"]))
 {
     $partida = new Partidas();
     $partida->crearPartida();
-    $jugadores = new Participantes();
-    $jugadores->crearParticipante($_POST["nombre"]);
+    $jugadores = new Jugadores();
+    $jugadores->crearJugador($_POST["nombre"]);
 }
 ?>
     <div class="contenedor">
@@ -47,6 +51,8 @@ if(isset($_POST["nombre"]))
 
         </form>
             <?php
+        }else{
+            var_dump($_SESSION["codigo"]);
         }
         ?>
     </div>

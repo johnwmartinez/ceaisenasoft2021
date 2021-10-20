@@ -5,8 +5,8 @@ require_once('../lib/db.php');
 require_once("../lib/funciones.php");
 require_once("../lib/config.php");
 
-require_once("../Modelos/Participantes.php");
-require_once("../Controladores/ParticipantesControlador.php");
+require_once("../Modelos/Jugadores.php");
+require_once("../Controladores/JugadoresControlador.php");
 require_once("../Modelos/Partidas.php");
 require_once("../Controladores/PartidasControlador.php");
 
