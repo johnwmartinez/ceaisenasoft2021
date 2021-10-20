@@ -13,6 +13,8 @@ require_once("../Modelos/Cartas.php");
 require_once("../Controladores/CartasControlador.php");
 require_once("../Modelos/PartidaSecreto.php");
 require_once("../Controladores/PartidaSecretoControlador.php");
+require_once("../Modelos/PartidaJugadorCartas.php");
+require_once("../Controladores/PartidaJugadorCartasControlador.php");
 
 // Pintamos el archivo como salida JSON para consultas desde Javascript
 header('Content-Type: application/json');

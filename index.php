@@ -8,6 +8,12 @@ require_once("Modelos/Jugadores.php");
 require_once("Controladores/JugadoresControlador.php");
 require_once("Modelos/Partidas.php");
 require_once("Controladores/PartidasControlador.php");
+require_once("Modelos/Cartas.php");
+require_once("Controladores/CartasControlador.php");
+require_once("Modelos/PartidaSecreto.php");
+require_once("Controladores/PartidaSecretoControlador.php");
+require_once("Modelos/PartidaJugadorCartas.php");
+require_once("Controladores/PartidaJugadorCartasControlador.php");
 
 
 ?>

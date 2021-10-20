@@ -1,6 +1,6 @@
 <?php
 
-class PartidaJugadorCartasModelo{
+class PartidasJugadorCartasModelo{
 
     // Constructor del Modelo
     function __construct()
