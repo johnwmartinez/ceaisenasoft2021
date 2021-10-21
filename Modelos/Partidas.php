@@ -91,10 +91,7 @@ class PartidasModelo{
     public function cambiarTurno($codigo){
 
         global $DB;
-        $query = "SELECT turno FROM partidas WHERE id_partida = 
-            (
-                SELECT id_partida FROM jugadores WHERE codigo = ?
-            )";
+        $query = "SELECT turno FROM partidas WHERE codigo = ? ";
 
         $res = $DB->query($query, array( $codigo ));
         
