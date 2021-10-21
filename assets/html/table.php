@@ -37,7 +37,29 @@
                 <!-- Turnos -->
                     <div class="col-md-3 turno">
                         <h2>Turno de: Juan</h2>
-                        <input type="checkbox" id="antonio">
+                        <form action="" class="form1">
+                            <input name="programadores" type="radio" id="Antonio">
+                            <input name="programadores" type="radio" id="Carlos">
+                            <input name="programadores" type="radio" id="Carolina">
+                            <input name="programadores" type="radio" id="Juan">
+                            <input name="programadores" type="radio" id="Juanita">
+                            <input name="programadores" type="radio" id="Manuel">
+                            <input name="programadores" type="radio" id="Pedro">
+                            <input name="modulos" type="radio" id="comprobante">
+                            <input name="modulos" type="radio" id="contabilidad">
+                            <input name="modulos" type="radio" id="facturacion">
+                            <input name="modulos" type="radio" id="nomina">
+                            <input name="modulos" type="radio" id="recibo">
+                            <input name="modulos" type="radio" id="usuarios">
+                            <input name="errores" type="radio" id="ecoding">
+                            <input name="errores" type="radio" id="error404">
+                            <input name="errores" type="radio" id="memory">
+                            <input name="errores" type="radio" id="null">
+                            <input name="errores" type="radio" id="stack">
+                            <input name="errores" type="radio" id="syntax">
+                            <input type="submit" id="submit">
+
+                        </form>
                     </div>
                 <!-- Fin Turnos -->
              <!-- Ultima pregunta -->
@@ -234,7 +256,7 @@
                                 <i class="far fa-times-circle cerrar"></i>
                             </div>
                         </div> -->
-                        <div class="row">
+                        <div class="row elecc">
                             <div class="col-md-6 ele1">
                                 <h1>Preguntar</h1>
                             </div>
@@ -248,61 +270,161 @@
                 <!-- Hacer pregunta -->
                 <div id="sobre" class="row sobre">
                     <div class="col-md-6 pintar2 ele11">
+                            
                             <div class="col-md-3">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div>
-                                            <label for="antonio"><img src="../img/programadores/Antonio.png" class="imagenE" alt=""></label>
+                                            <label for="Antonio"><img src="../img/programadores/Antonio.png" title="Antonio" class="imagenE activoP" alt=""></label>
                                             <p>Antonio</p>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div>
-                                            <label><img src="../img/programadores/Antonio.png" class="imagenE" alt=""></label>
-                                            <p>Antonio</p>
+                                            <label for="Carlos"><img src="../img/programadores/Carlos.png" title="Carlos" class="imagenE" alt=""></label>
+                                            <p>Carlos</p>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div>
-                                            <label><img src="../img/programadores/Antonio.png" class="imagenE" alt=""></label>
-                                            <p>Antonio</p>
+                                            <label for="Carolina"><img src="../img/programadores/Carolina.png" title="Carolina" class="imagenE" alt=""></label>
+                                            <p>Carolina</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div>
-                                            <label><img src="../img/programadores/Antonio.png" class="imagenE" alt=""></label>
-                                            <p>Antonio</p>
+                                            <label for="Juan"><img src="../img/programadores/Juan.png" title="Juan" class="imagenE" alt=""></label>
+                                            <p>Juan</p>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div>
-                                            <label><img src="../img/programadores/Antonio.png" class="imagenE" alt=""></label>
-                                            <p>Antonio</p>
+                                            <label for="Juanita"><img src="../img/programadores/Juanita.png" title="Juanita" class="imagenE" alt=""></label>
+                                            <p>Juanita</p>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div>
-                                            <label><img src="../img/programadores/Antonio.png" class="imagenE" alt=""></label>
-                                            <p>Antonio</p>
+                                            <label for="Manuel"><img src="../img/programadores/Manuel.png" title="Manuel" class="imagenE" alt=""></label>
+                                            <p>Manuel</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div>
-                                            <label><img src="../img/programadores/Antonio.png" class="imagenE" alt=""></label>
-                                            <p>Antonio</p>
+                                            <label for="Pedro"><img src="../img/programadores/Pedro.png" title="Pedro" class="imagenE" alt=""></label>
+                                            <p>Pedro</p>
                                         </div>
-                                    </div>
-                                    
-                                    
+                                    </div>     
                                 </div>
                             </div>
-                            <div class="col-md-3"></div>
-                            <div class="col-md-3"></div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="comprobante"><img src="../img/modulos/comprobante_contable.png" title="Comprobante contable" class="imagenE" alt=""></label>
+                                            <p style="margin-top:7px">comprobante</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="contabilidad"><img src="../img/modulos/contabilidad.png" title="Contabilidad" class="imagenE" alt=""></label>
+                                            <p style="font-size:14px;">contabilidad</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="facturacion"><img src="../img/modulos/facturacion.png" title="Facturacion" class="imagenE" alt=""></label>
+                                            <p style="margin-top:7px">facturacion</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="nomina"><img src="../img/modulos/nomina.png" title="Nomina" class="imagenE" alt=""></label>
+                                            <p>nomina</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="recibo"><img src="../img/modulos/recibo.png" title="Recibo" class="imagenE" alt=""></label>
+                                            <p>recibo</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="usuarios"><img src="../img/modulos/usuarios.png" title="Usuarios" class="imagenE" alt=""></label>
+                                            <p>usuarios</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                    <div style="opacity:0">
+                                            <label for=""><img src="../img/modulos/usuarios.png" title="" class="imagenE" alt=""></label>
+                                            <p>usuarios</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="ecoding"><img src="../img/errores/ecodingError.png" title="Ecoding Error" class="imagenE" alt=""></label>
+                                            <p>ecoding</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="error404"><img src="../img/errores/error404.png" title="Error 404" class="imagenE" alt=""></label>
+                                            <p>error404</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="memory"><img src="../img/errores/memoryOutOfRange.png" title="Memory Out Of Range" class="imagenE" alt=""></label>
+                                            <p>memory</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="null"><img src="../img/errores/nullPointer.png" title="Null Pointer" class="imagenE" alt=""></label>
+                                            <p>null</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="stack"><img src="../img/errores/stackOverflow.png" title="Stack Overflow" class="imagenE" alt=""></label>
+                                            <p>stack</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <label for="syntax"><img src="../img/errores/syntaxError.png" title="Syntax Error" class="imagenE" alt=""></label>
+                                            <p>syntax</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                    <div style="opacity:0">
+                                            <label for=""><img src="../img/modulos/usuarios.png" title="" class="imagenE" alt=""></label>
+                                            <p>usuarios</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <label for="submit" class="btn btn-lg btn-success">Aceptar</label>
+                            </div>
                     </div>
                 </div>                    
                 <!-- Fin Hacer pregunta -->

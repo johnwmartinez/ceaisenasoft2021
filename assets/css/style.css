@@ -73,6 +73,18 @@ h2{
     z-index: 2;
 }
 
+.sobreIND{
+    z-index: 2;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 200px;
+    min-width: 400px;
+    background:#49618f;
+    border-radius: 10px;
+}
+
 .padin{
     padding: 100px;
     padding-top: 20px;
@@ -85,9 +97,18 @@ h2{
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: none;
 }
 
+.winer{
+    font-size: 120px;
+}
+
+ .win{
+    background-color: #4242ad;
+    text-align: center;
+    cursor: pointer;
+    min-height: 250px;
+ }
 .ele1{
     background-color: #4242ad;
     text-align: center;
@@ -259,5 +280,14 @@ h2{
 
 .imagenE{
     max-width: 50px;
-    
+    cursor: pointer;
 }
+
+.activoP{
+    box-shadow: 0px 0px 10px rgb(196, 65, 65);
+}
+
+.form1, .pintar, .elecc{
+    display:none;
+}
+
