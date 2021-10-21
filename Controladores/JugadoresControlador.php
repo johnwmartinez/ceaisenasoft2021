@@ -47,11 +47,10 @@ class Jugadores extends JugadoresModelo{
             $carta2 = $cartasSecreto[0]["idcarta2"];
             $carta3 = $cartasSecreto[0]["idcarta3"];
 
-
             //Elimino los ids de las cartas secreto de la lista de ids de todas las cartas
-            unset($total_cartas[array_search($carta1, $total_cartas)]);
-            unset($total_cartas[array_search($carta2, $total_cartas)]);
-            unset($total_cartas[array_search($carta3, $total_cartas)]);
+             unset($total_cartas[array_search($carta1, $total_cartas)]);
+             unset($total_cartas[array_search($carta2, $total_cartas)]);
+             unset($total_cartas[array_search($carta3, $total_cartas)]);
 
             /*Consulto si existen cartas en la partida*/ 
             $partidaJugadorCartas = new PartidaJugadorCartas();
