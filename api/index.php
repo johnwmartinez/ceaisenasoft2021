@@ -7,14 +7,21 @@ require_once("../lib/config.php");
 
 require_once("../Modelos/Jugadores.php");
 require_once("../Controladores/JugadoresControlador.php");
+
 require_once("../Modelos/Partidas.php");
 require_once("../Controladores/PartidasControlador.php");
+
 require_once("../Modelos/Cartas.php");
 require_once("../Controladores/CartasControlador.php");
+
 require_once("../Modelos/PartidaSecreto.php");
 require_once("../Controladores/PartidaSecretoControlador.php");
+
 require_once("../Modelos/PartidaJugadorCartas.php");
 require_once("../Controladores/PartidaJugadorCartasControlador.php");
+
+require_once("../Modelos/PartidaJugadorTabla.php");
+require_once("../Controladores/PartidaJugadorTablaControlador.php");
 
 // Pintamos el archivo como salida JSON para consultas desde Javascript
 header('Content-Type: application/json');
@@ -56,9 +63,12 @@ if(isset($_POST["processing"])):
             $codigo = $_SESSION["codigo"];  /* Código del USUARIO */
             /* Usuario que ya está asignado a una partida */
             $jugadores->updated_atTime($codigo); /* Actualizamos el campo jugadores:updated_at */
+            /* Procedemos a validar que los usuarios asociados a la partida estén activos */
+
             /* Validamos qué partida es la que el jugador está participando */
             $partidaData = $partidas->getPartidaPorCodigoUsuario($codigo); /* La Data de la partida */
-            
+            $partidaData["estado"] = (isset($partidaData["estado"])) ? $partidaData["estado"] : 999; /* Variable de validación */
+
             switch($partidaData["estado"]):
                 case 0:
                     // Pendiente;
@@ -82,6 +92,7 @@ if(isset($_POST["processing"])):
                     );
                 break;
                 default:
+                    unset($_SESSION["codigo"]); /* Quitamos la sesión porque no tiene partida asignada */
                     $salida = array(
                         "codigo" => 999, /**/
                         "mensaje" => "Código temporal de pruebas. Es que todo va ok.",
