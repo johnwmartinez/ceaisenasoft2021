@@ -56,6 +56,8 @@ if(isset($_POST["processing"])):
             $codigo = $_SESSION["codigo"];  /* Código del USUARIO */
             /* Usuario que ya está asignado a una partida */
             $jugadores->updated_atTime($codigo); /* Actualizamos el campo jugadores:updated_at */
+            /* Procedemos a validar que los usuarios asociados a la partida estén activos */
+            
             /* Validamos qué partida es la que el jugador está participando */
             $partidaData = $partidas->getPartidaPorCodigoUsuario($codigo); /* La Data de la partida */
             $partidaData["estado"] = (isset($partidaData["estado"])) ? $partidaData["estado"] : 999; /* Variable de validación */

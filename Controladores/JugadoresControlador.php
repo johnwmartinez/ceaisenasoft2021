@@ -26,7 +26,7 @@ class Jugadores extends JugadoresModelo{
         
         if($existePartida): /* Si la partida existe, continuamos el proceso creando el jugador */
             
-            $codigoJugador = $this->crearJugador($nombre);
+            $codigoJugador = $this->crearJugador($nombre, $codigo);
 
             /* Traemos el listado de todas las cartas disponibles */
             $cartas = new Cartas();

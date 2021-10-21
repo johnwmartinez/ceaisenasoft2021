@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2021 a las 21:49:17
+-- Tiempo de generación: 21-10-2021 a las 17:17:30
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -60,10 +60,11 @@ INSERT INTO `cartas` (`idcarta`, `nombre`, `categoria`) VALUES
 
 CREATE TABLE `jugadores` (
   `id_jugador` int(11) NOT NULL,
+  `id_partida` int(11) NOT NULL,
   `codigo` varchar(100) DEFAULT NULL,
   `nombre` varchar(150) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL
+  `updated_at` int(14) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -76,6 +77,7 @@ CREATE TABLE `partidas` (
   `id_partida` int(11) NOT NULL,
   `codigo` varchar(5) NOT NULL COMMENT 'Código hexadecimal que indifica la partida',
   `turno` int(11) DEFAULT 1,
+  `ganador` int(11) DEFAULT NULL,
   `estado` int(11) DEFAULT 0 COMMENT '0:Pendiente por comenzar, 1:Activa, 2:Finalizada'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -124,7 +126,8 @@ CREATE TABLE `rel_partida_jugador_cartas` (
   `idcarta3` int(11) NOT NULL,
   `idcarta4` int(11) NOT NULL,
   `fecha` datetime NOT NULL DEFAULT current_timestamp(),
-  `orden_llegada` int(11) DEFAULT NULL
+  `orden_llegada` int(11) DEFAULT NULL,
+  `activo` int(2) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -155,14 +158,16 @@ ALTER TABLE `cartas`
 -- Indices de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  ADD PRIMARY KEY (`id_jugador`);
+  ADD PRIMARY KEY (`id_jugador`),
+  ADD KEY `fb_partida_jugador` (`id_partida`);
 
 --
 -- Indices de la tabla `partidas`
 --
 ALTER TABLE `partidas`
   ADD PRIMARY KEY (`id_partida`),
-  ADD UNIQUE KEY `codigo` (`codigo`);
+  ADD UNIQUE KEY `codigo` (`codigo`),
+  ADD KEY `fk_partidas_ganador` (`ganador`);
 
 --
 -- Indices de la tabla `partidas_preguntas`
@@ -221,13 +226,13 @@ ALTER TABLE `cartas`
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `partidas`
 --
 ALTER TABLE `partidas`
-  MODIFY `id_partida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_partida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `partidas_preguntas`
@@ -239,13 +244,13 @@ ALTER TABLE `partidas_preguntas`
 -- AUTO_INCREMENT de la tabla `partidas_secreto`
 --
 ALTER TABLE `partidas_secreto`
-  MODIFY `id_partida_secreto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_partida_secreto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `rel_partida_jugador_cartas`
 --
 ALTER TABLE `rel_partida_jugador_cartas`
-  MODIFY `id_partida_jugador_cartas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_partida_jugador_cartas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `rel_partida_jugador_tablas`
@@ -256,6 +261,18 @@ ALTER TABLE `rel_partida_jugador_tablas`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `jugadores`
+--
+ALTER TABLE `jugadores`
+  ADD CONSTRAINT `fb_partida_jugador` FOREIGN KEY (`id_partida`) REFERENCES `partidas` (`id_partida`);
+
+--
+-- Filtros para la tabla `partidas`
+--
+ALTER TABLE `partidas`
+  ADD CONSTRAINT `fk_partidas_ganador` FOREIGN KEY (`ganador`) REFERENCES `jugadores` (`id_jugador`);
 
 --
 -- Filtros para la tabla `partidas_preguntas`

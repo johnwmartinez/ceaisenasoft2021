@@ -8,13 +8,14 @@ class JugadoresModelo{
 
     }
 
-    function crearJugador($nombre)
+    function crearJugador($nombre, $codigoPartida)
     {
         global $DB;
         $_SESSION["codigo"] = session_code_user();
         
-        $query = "INSERT INTO jugadores (codigo, nombre, updated_at) VALUES (?, ?, ?)";
+        $query = "INSERT INTO jugadores (id_partida, codigo, nombre, updated_at) VALUES ( (SELECT id_partida FROM partidas WHERE codigo LIKE ?), ?, ?, ?)";
         $rel = $DB->query($query, array(
+            $codigoPartida,
             $_SESSION["codigo"],
             $nombre,
             time()
