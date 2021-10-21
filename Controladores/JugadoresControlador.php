@@ -46,13 +46,12 @@ class Jugadores extends JugadoresModelo{
             $carta1 = $cartasSecreto[0]["idcarta1"];
             $carta2 = $cartasSecreto[0]["idcarta2"];
             $carta3 = $cartasSecreto[0]["idcarta3"];
-           
+
+
             //Elimino los ids de las cartas secreto de la lista de ids de todas las cartas
             unset($total_cartas[array_search($carta1, $total_cartas)]);
             unset($total_cartas[array_search($carta2, $total_cartas)]);
             unset($total_cartas[array_search($carta3, $total_cartas)]);
-
-           
 
             /*Consulto si existen cartas en la partida*/ 
             $partidaJugadorCartas = new PartidaJugadorCartas();
@@ -62,13 +61,24 @@ class Jugadores extends JugadoresModelo{
             /*Si ya existen cartas para esa partida se eliminan de las cartas totales*/
             /*Agregar 4 cartas de entre las disponibles al usuario nuevo */
 
+            $jugadorRegistro = $this->getJugadorbyCodigo($codigoJugador); /*Obtengo el registro del jugador por el código del mismo*/
+            
             if(count($cartasPartida) <= 0):
-                $jugadorRegistro = $this->getJugadorbyCodigo($codigoJugador); /*Obtengo el registro del jugador por el código del mismo*/
-
                 /*Se reparten las 4 cartas para cada jugador, enviando el código de la partida, el idjugador y las cartas restantes*/
                 $partidaJugadorCartas->repartirCartasJugador($codigo, $jugadorRegistro[0]["id_jugador"], $total_cartas);
             else: 
-                                
+                $cartasBarajadas = $partidaJugadorCartas->consultarCartasPartida($codigo); /*Obtengo el registro del jugador por el código del mismo*/
+                $cartasEntregadas = array();
+                foreach($cartasBarajadas as $cadaRegistro){
+                    unset($total_cartas[array_search($cadaRegistro["idcarta1"], $total_cartas)]);
+                    unset($total_cartas[array_search($cadaRegistro["idcarta2"], $total_cartas)]);
+                    unset($total_cartas[array_search($cadaRegistro["idcarta3"], $total_cartas)]);
+                    unset($total_cartas[array_search($cadaRegistro["idcarta4"], $total_cartas)]);
+                }
+
+                /*Se reparten las 4 cartas para cada jugador, enviando el código de la partida, el idjugador y las cartas restantes*/
+                $partidaJugadorCartas->repartirCartasJugador($codigo, $jugadorRegistro[0]["id_jugador"], $total_cartas);
+
             endif;
             
 

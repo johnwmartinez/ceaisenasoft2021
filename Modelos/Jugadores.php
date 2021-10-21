@@ -21,7 +21,7 @@ class JugadoresModelo{
             time()
         ));
     
-        return  $_SESSION["codigo"]; /*Devuelvo el codigo del jugador que fue creado*/
+        return $_SESSION["codigo"]; /*Devuelvo el codigo del jugador que fue creado*/
 
     }
 
