@@ -181,9 +181,18 @@ if(isset($_GET["limpiar"]))
                             let arenaTurno = '<h3>Turno de: </h3>'
                             arenaTurno += `<div class="jugadorIndv">${data.frontend.turno.nombre}</div>`
                             document.querySelector('.arenaTurno').innerHTML = arenaTurno
-
+                            
                             /* 3. Última pregunta de un jugador */
                             let arenaPreguntaJugador = '<h3>Pregunta: </h3>';
+                            if(data.frontend.preguntas[0] == 0){
+                                arenaPreguntaJugador = `</div>`
+                            }else{
+
+                                arenaPreguntaJugador += `<div class="jugadorIndv">${data.frontend.preguntas.nombre} preguntó por las cartas ${data.frontend.preguntas.carta_1}, ${data.frontend.preguntas.carta_2} y ${data.frontend.preguntas.carta_3}</div>`
+                            }
+                            document.querySelector('.arenaPreguntaJugador').innerHTML = arenaPreguntaJugador
+
+                            /* 4. La tabla del jugador */
                         }
                         const codigos_respuesta = [201, 203] /* Códigos de respuestas de estado de partida */
                         if(codigos_respuesta.includes( data.codigo )){
