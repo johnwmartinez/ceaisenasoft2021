@@ -7,14 +7,21 @@ require_once("../lib/config.php");
 
 require_once("../Modelos/Jugadores.php");
 require_once("../Controladores/JugadoresControlador.php");
+
 require_once("../Modelos/Partidas.php");
 require_once("../Controladores/PartidasControlador.php");
+
 require_once("../Modelos/Cartas.php");
 require_once("../Controladores/CartasControlador.php");
+
 require_once("../Modelos/PartidaSecreto.php");
 require_once("../Controladores/PartidaSecretoControlador.php");
+
 require_once("../Modelos/PartidaJugadorCartas.php");
 require_once("../Controladores/PartidaJugadorCartasControlador.php");
+
+require_once("../Modelos/PartidaJugadorTabla.php");
+require_once("../Controladores/PartidaJugadorTablaControlador.php");
 
 // Pintamos el archivo como salida JSON para consultas desde Javascript
 header('Content-Type: application/json');

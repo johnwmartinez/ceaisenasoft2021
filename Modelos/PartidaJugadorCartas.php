@@ -15,6 +15,13 @@ class PartidasJugadorCartasModelo{
         return $res;
     }
 
+    public function consultarCartasPartidaPorJugador($id_jugador, $codigo){
+        global $DB;
+        $query = "SELECT * FROM rel_partida_jugador_cartas WHERE id_partida =  (SELECT id_partida FROM partidas WHERE codigo LIKE ?) AND activo = 1 AND id_jugador = ?";
+        $res = $DB->query($query, array($codigo, $id_jugador)); 
+        return $res;
+    }
+
     public function repartirCartasJugador($codigo, $idjugador, $total_cartas){
 
         global $DB;
@@ -43,6 +50,7 @@ class PartidasJugadorCartasModelo{
                 break;
             }
         }
+
         /* Insertamos a la base de datos el jugador con sus cartas */
         $query = "INSERT INTO rel_partida_jugador_cartas (id_partida, id_jugador, idcarta1, idcarta2, idcarta3, idcarta4, fecha, orden_llegada) 
                 VALUES ((SELECT id_partida FROM partidas WHERE codigo LIKE ?) ,?,?,?,?,?,?,?
@@ -57,6 +65,10 @@ class PartidasJugadorCartasModelo{
             date("Y-m-d H:m:i"),
             $orden_llegada
         ));
+
+        /*Inserto los registros a la tabla rel_partida_jugador_tablas*/
+        $partidaJugadorTabla = new PartidaJugadorTabla();
+        $partidaJugadorTabla->insertarPartidaJugadorTabla($codigo, $idjugador);
     }
 
 

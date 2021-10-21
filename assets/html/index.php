@@ -67,8 +67,8 @@
                     <h2>Espera mientras te unimos a la partida</h2>
                     <div class="padre">
                     <div class="preloader"></div>
-                    </div>
                 </div>
+            </div>
             <!-- Fin Ventana emergente de cargando -->
             <!-- Ventana emergente de error -->
             <div id="sobre" class="row sobre">
