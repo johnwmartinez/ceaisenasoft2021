@@ -82,4 +82,34 @@ class PartidasModelo{
         return $salida;
     }
 
+    /*Método que actualiza el turno 
+    1 pasaría a 2
+    2 pasaría a 3
+    3 pasaría a 4
+    4 pasaría a 1*/
+    /*Recibe como parámetro el codigo de la partida*/
+    public function cambiarTurno($codigo){
+
+        global $DB;
+        $query = "SELECT turno FROM partidas WHERE id_partida = 
+            (
+                SELECT id_partida FROM jugadores WHERE codigo = ?
+            )";
+
+        $res = $DB->query($query, array( $codigo ));
+        
+        if(isset($res[0]["turno"])){
+            if($res[0]["turno"] == 4){ /*Si el turno es el 4, se debe devolver al número 1*/
+                $turnoasignar = 1;
+            }else{
+                $turnoasignar = $res[0]["turno"] +1; /*De lo contrario le sumo 1 al turno actual*/
+            }
+        }
+
+        $query = "UPDATE partidas SET turno = ".$turnoasignar." WHERE codigo LIKE ?";
+        $res = $DB->query($query, array( $codigo ));
+        
+    }
+    
+
 }
