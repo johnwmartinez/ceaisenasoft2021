@@ -20,6 +20,7 @@ class Partidas extends PartidasModelo{
     {
         $jugadores = new Jugadores();
         $partidas = new Partidas();
+        $partidasPreguntas = new PartidasPreguntas();
         /* 1. Determinar los jugadores diferentes a mi  */
         $contrincantes = $jugadores->jugadoresContrincantes( $codigo ); /* Listos los contrincantes */
         
@@ -30,11 +31,14 @@ class Partidas extends PartidasModelo{
         endif;
 
         /* 3. Traer la última pregunta */
-        
+        $pregunta = $partidasPreguntas->preguntaReciente($codigo);
+
+        /* 4. Tabla del jugador con cartas tachadas */
         
         $salida = array(
             "contrincantes" => $contrincantes,
-            "turno" => $turno
+            "turno" => $turno,
+            "preguntas" => $pregunta,
         );
         return $salida;
     }
