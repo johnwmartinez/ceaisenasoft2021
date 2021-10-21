@@ -57,7 +57,7 @@ if(isset($_POST["processing"])):
             /* Usuario que ya está asignado a una partida */
             $jugadores->updated_atTime($codigo); /* Actualizamos el campo jugadores:updated_at */
             /* Procedemos a validar que los usuarios asociados a la partida estén activos */
-
+            $jugadores->verificarJugadoresActivos($codigo);
             /* Validamos qué partida es la que el jugador está participando */
             $partidaData = $partidas->getPartidaPorCodigoUsuario($codigo); /* La Data de la partida */
             $partidaData["estado"] = (isset($partidaData["estado"])) ? $partidaData["estado"] : 999; /* Variable de validación */
@@ -67,7 +67,7 @@ if(isset($_POST["processing"])):
                     // Pendiente;
                     $salida = array(
                         "codigo" => 201, /* Pendiente */
-                        "mensaje" => "Pendiente de arrancar el juego",
+                        "mensaje" => "Pendiente de arrancar el juego " . $codigo,
                     );
                 break;
                 case 2:
@@ -85,7 +85,7 @@ if(isset($_POST["processing"])):
                     );
                 break;
                 default:
-                    //unset($_SESSION["codigo"]); /* Quitamos la sesión porque no tiene partida asignada */
+                    unset($_SESSION["codigo"]); /* Quitamos la sesión porque no tiene partida asignada */
                     $salida = array(
                         "codigo" => 999, /**/
                         "mensaje" => "Código temporal de pruebas. Es que todo va ok.",

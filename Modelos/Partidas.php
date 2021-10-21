@@ -19,7 +19,7 @@ class PartidasModelo{
         return $codigo; /* Devuelvo el código con el que la partida fue creada */
     }
 
-    public function getPartidaPorCodigo($codigo) /* Traemos toda la info de una partida por código */
+    public function getPartidaPorCodigo($codigo) /* Traemos toda la info de una partida por código de partida */
     {
         global $DB;
 
@@ -30,7 +30,7 @@ class PartidasModelo{
         return 0;
     }
 
-    public function getPartidaPorCodigoUsuario($codigo) /* Traemos toda la info de una partida por código */
+    public function getPartidaPorCodigoUsuario($codigo) /* Traemos toda la info de una partida por código de usuario */
     {
         
         global $DB;
@@ -41,7 +41,7 @@ class PartidasModelo{
         $res = $DB->query($query, array( $codigo ));
         
         if(isset($res[0]["codigo"]))
-            return $this->getPartidaPorCodigo($res[0]["codigo"]);
+            return $this->getPartidaPorCodigo($res[0]["codigo"]); /*  */
         return array(0);
         
     }
