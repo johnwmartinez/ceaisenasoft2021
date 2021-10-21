@@ -46,11 +46,15 @@ class Jugadores extends JugadoresModelo{
             $carta1 = $cartasSecreto[0]["idcarta1"];
             $carta2 = $cartasSecreto[0]["idcarta2"];
             $carta3 = $cartasSecreto[0]["idcarta3"];
+
+            echo "La carta secreto 1 es: ".$carta1. "<br>";
+            echo "La carta secreto 2 es: ".$carta2. "<br>";
+            echo "La carta secreto 3 es: ".$carta3. "<br>";
            
             //Elimino los ids de las cartas secreto de la lista de ids de todas las cartas
-            unset($total_cartas[array_search($carta1, $total_cartas)]);
-            unset($total_cartas[array_search($carta2, $total_cartas)]);
-            unset($total_cartas[array_search($carta3, $total_cartas)]);
+             unset($total_cartas[array_search($carta1, $total_cartas)]);
+             unset($total_cartas[array_search($carta2, $total_cartas)]);
+             unset($total_cartas[array_search($carta3, $total_cartas)]);
 
            
 
@@ -64,7 +68,6 @@ class Jugadores extends JugadoresModelo{
 
             if(count($cartasPartida) <= 0):
                 $jugadorRegistro = $this->getJugadorbyCodigo($codigoJugador); /*Obtengo el registro del jugador por el código del mismo*/
-
                 /*Se reparten las 4 cartas para cada jugador, enviando el código de la partida, el idjugador y las cartas restantes*/
                 $partidaJugadorCartas->repartirCartasJugador($codigo, $jugadorRegistro[0]["id_jugador"], $total_cartas);
             else: 
