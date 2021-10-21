@@ -35,6 +35,19 @@ require_once("Controladores/PartidasPreguntasControlador.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encuentra el Bug - Juego realizado en PHP y Javascript</title>
+    <style>
+        h1, h2, h3, h4, h5
+        {
+            margin:0 auto;
+            margin-bottom:10px;
+        }
+        .arenaPartida > div
+        {
+            background:#eee;
+            margin-bottom:10px;
+            padding:10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -156,6 +169,21 @@ if(isset($_GET["limpiar"]))
                         if(data.codigo == 202){ /* Partida en progreso */
                             document.querySelector('.arena_pruebas').innerHTML = data.mensaje
                             arena_partidas = 1
+                            /* Armamos el Frontend */
+                            /* 1. Jugadores */
+                            let arenaJugadores = '<h3>Contrincantes: </h3>'
+                            data.frontend.contrincantes.forEach(function( cadaU ){
+                                arenaJugadores += `<div class="jugadorIndv">${cadaU.nombre}</div>`
+                            })
+                            document.querySelector('.arenajugadores').innerHTML = arenaJugadores
+
+                            /* 2. Turno */
+                            let arenaTurno = '<h3>Turno de: </h3>'
+                            arenaTurno += `<div class="jugadorIndv">${data.frontend.turno.nombre}</div>`
+                            document.querySelector('.arenaTurno').innerHTML = arenaTurno
+
+                            /* 3. Última pregunta de un jugador */
+                            let arenaPreguntaJugador = '<h3>Pregunta: </h3>';
                         }
                         const codigos_respuesta = [201, 203] /* Códigos de respuestas de estado de partida */
                         if(codigos_respuesta.includes( data.codigo )){
