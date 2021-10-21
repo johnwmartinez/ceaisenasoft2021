@@ -46,4 +46,14 @@ class PartidasModelo{
         
     }
 
+    public function activarPartida($codigo) /* Activar una partida */
+    {
+        global $DB;
+
+        $query = "UPDATE partidas SET estado = 1 WHERE codigo LIKE ?";
+        $res = $DB->query($query, array( $codigo ));
+    }
+
+    
+
 }

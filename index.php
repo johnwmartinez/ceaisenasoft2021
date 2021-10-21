@@ -84,6 +84,27 @@ if(isset($_GET["limpiar"]))
         </div>
     </div>
 
+    <div class="arenaPartida">
+        <div class="arenajugadores">
+        </div>
+        <div class="arenaTurno">
+        </div>
+        <div class="arenaPreguntaJugador">
+        </div>
+        <div class="arenaTabla">
+        </div>
+        <div class="arenaAtaque">
+            <div class="arenaAcusacion">
+            </div>
+            <div class="arenaPreguntaIndividual">
+            </div>
+        </div>
+        <div class="arenaCartas">
+        </div>
+        <div class="arenaAyudas">
+        </div>
+    </div>
+
     <div class="arena_pruebas">
         Aquí vamos a imprimir como van las pruebas de mi aplicativo
     </div>
@@ -101,6 +122,10 @@ if(isset($_GET["limpiar"]))
                 mostrar_esconder('.creacionPartidas', 'mostrar')
             else
                 mostrar_esconder('.creacionPartidas', 'esconder')
+            if(conf.arena_partidas == 1)
+                mostrar_esconder('.arenaPartida', 'mostrar')
+            else
+                mostrar_esconder('.arenaPartida', 'esconder')
         
         }
         function consultaAPI() {
@@ -118,16 +143,18 @@ if(isset($_GET["limpiar"]))
                         
                         // Variables de diseño
                         let pantalla_inicial = 0
+                        let arena_partidas = 0
 
                         // Codigo 100: Mostramos la pantalla inicial
                         if(data.codigo == 100){
                             document.querySelector('.arena_pruebas').innerHTML = 'Mostramos pantalla inicial porque no tiene variable sesión creada'
                             pantalla_inicial = 1
                         }
-                        if(data.codigo == 100){
-                            document.querySelector('.arena_pruebas').innerHTML = 'Mostramos pantalla inicial porque no tiene variable sesión creada'
+                        if(data.codigo == 202){ /* Partida en progreso */
+                            document.querySelector('.arena_pruebas').innerHTML = data.mensaje
+                            arena_partidas = 1
                         }
-                        const codigos_respuesta = [201, 202, 203] /* Códigos de respuestas de estado de partida */
+                        const codigos_respuesta = [201, 203] /* Códigos de respuestas de estado de partida */
                         if(codigos_respuesta.includes( data.codigo )){
                             document.querySelector('.arena_pruebas').innerHTML = data.mensaje
                         }
@@ -135,6 +162,7 @@ if(isset($_GET["limpiar"]))
                         /* Cambios de diseño */
                         let salidaDiseno = {
                             pantalla_inicial: pantalla_inicial,
+                            arena_partidas: arena_partidas,
                         };
                         estructuraFrontend(salidaDiseno)
 

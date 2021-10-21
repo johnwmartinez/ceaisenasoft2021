@@ -64,7 +64,7 @@ if(isset($_POST["processing"])):
             /* Usuario que ya está asignado a una partida */
             $jugadores->updated_atTime($codigo); /* Actualizamos el campo jugadores:updated_at */
             /* Procedemos a validar que los usuarios asociados a la partida estén activos */
-            $jugadores->verificarJugadoresActivos($codigo);
+            $jugadores->verificarJugadoresActivos($codigo); /* Si no está activo, sesión rompe y me manda a formulario principal */
             /* Validamos qué partida es la que el jugador está participando */
             $partidaData = $partidas->getPartidaPorCodigoUsuario($codigo); /* La Data de la partida */
             $partidaData["estado"] = (isset($partidaData["estado"])) ? $partidaData["estado"] : 999; /* Variable de validación */
@@ -74,7 +74,7 @@ if(isset($_POST["processing"])):
                     // Pendiente;
                     $salida = array(
                         "codigo" => 201, /* Pendiente */
-                        "mensaje" => "Pendiente de arrancar el juego " . $codigo,
+                        "mensaje" => "Pendiente de arrancar el juego ",
                     );
                 break;
                 case 2:
@@ -85,7 +85,9 @@ if(isset($_POST["processing"])):
                     );
                 break;
                 case 1:
-                    // Activa;
+                    /* Partida en progreso */
+                    $dataPartidaTotal = $partidas->dataPartidaTotal($codigo);
+
                     $salida = array(
                         "codigo" => 202, /* Partida activa */
                         "mensaje" => "Partida en progreso...",

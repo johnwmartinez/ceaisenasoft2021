@@ -14,5 +14,11 @@ class Partidas extends PartidasModelo{
             return true;
         return false;
     }
+
+    /* Creamos la lógica deuna partida Total abierta */
+    public function dataPartidaTotal($codigo) 
+    {
+        
+    }
    
 }
