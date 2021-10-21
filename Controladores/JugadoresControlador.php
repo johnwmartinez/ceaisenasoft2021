@@ -64,6 +64,8 @@ class Jugadores extends JugadoresModelo{
 
             if(count($cartasPartida) <= 0):
                 $jugadorRegistro = $this->getJugadorbyCodigo($codigoJugador); /*Obtengo el registro del jugador por el código del mismo*/
+
+                /*Se reparten las 4 cartas para cada jugador, enviando el código de la partida, el idjugador y las cartas restantes*/
                 $partidaJugadorCartas->repartirCartasJugador($codigo, $jugadorRegistro[0]["id_jugador"], $total_cartas);
             else: 
                                 
