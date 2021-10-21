@@ -43,6 +43,7 @@ class PartidaSecretoModelo{
         
     }
 
+    /*Trae toda la información de las cartas secreto de la partida enviada por parámetro*/
     public function consultarCartasPartida($codigo){
         global $DB;
 
