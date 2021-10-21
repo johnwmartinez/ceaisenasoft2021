@@ -62,7 +62,7 @@
                 </div>
             <!-- fin del apartado de unirse a un juego -->
             <!-- Ventana emergente de cargando -->
-            <div id="sobre" class="row sobre">
+            <div id="sobre" class="row sobreIND">
                 <div class="">
                     <h2>Espera mientras te unimos a la partida</h2>
                     <div class="padre">
@@ -71,7 +71,7 @@
             </div>
             <!-- Fin Ventana emergente de cargando -->
             <!-- Ventana emergente de error -->
-            <div id="sobre" class="row sobre">
+            <div id="sobre" class="row sobreIND">
                 <div class="">
                     <h2>No se ha podido conectar con la partida</h2>
                     <div class="padre">
