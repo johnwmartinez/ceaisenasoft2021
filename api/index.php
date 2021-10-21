@@ -58,6 +58,7 @@ if(isset($_POST["processing"])):
             $jugadores->updated_atTime($codigo); /* Actualizamos el campo jugadores:updated_at */
             /* Validamos qué partida es la que el jugador está participando */
             $partidaData = $partidas->getPartidaPorCodigoUsuario($codigo); /* La Data de la partida */
+            $partidaData["estado"] = (isset($partidaData["estado"])) ? $partidaData["estado"] : 999; /* Variable de validación */
             
             switch($partidaData["estado"]):
                 case 0:
