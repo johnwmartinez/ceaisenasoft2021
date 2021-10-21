@@ -38,7 +38,7 @@ class PartidasModelo{
         $res = $DB->query($query, array( $codigo ));
         if(isset($res[0]["codigo"]))
             return $this->getPartidaPorCodigo($res[0]["codigo"]);
-        return 0;
+        return array(0);
         
     }
 

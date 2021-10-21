@@ -59,7 +59,7 @@ if(isset($_POST["processing"])):
             /* Validamos qué partida es la que el jugador está participando */
             $partidaData = $partidas->getPartidaPorCodigoUsuario($codigo); /* La Data de la partida */
             $partidaData["estado"] = (isset($partidaData["estado"])) ? $partidaData["estado"] : 999; /* Variable de validación */
-            
+
             switch($partidaData["estado"]):
                 case 0:
                     // Pendiente;
@@ -83,6 +83,7 @@ if(isset($_POST["processing"])):
                     );
                 break;
                 default:
+                    unset($_SESSION["codigo"]); /* Quitamos la sesión porque no tiene partida asignada */
                     $salida = array(
                         "codigo" => 999, /**/
                         "mensaje" => "Código temporal de pruebas. Es que todo va ok.",
