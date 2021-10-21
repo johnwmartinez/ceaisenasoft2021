@@ -7,7 +7,7 @@ body{
 }
 .opcion, .opcion1, .contenido{
     background: #627A8F;
-    
+    min-height: 800px;
     padding: 2rem;
     border-radius: 10px;
 }
@@ -71,14 +71,61 @@ h2{
 
 .sobre{
     z-index: 2;
+}
+
+.padin{
+    padding: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.pintar{
+    background:#49618f;
+    border-radius: 10px;
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-height: 200px;
-    min-width: 400px;
+    display: none;
+}
+
+.ele1{
+    background-color: #4242ad;
+    text-align: center;
+    cursor: pointer;
+    min-height: 250px;
+    align-content: center;
+    align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.ele11{
+    background-color: #4242ad;
+    text-align: center;
+    min-height: 250px;
+    align-content: center;
+    align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.ele2{
+    background-color: #9b3838;
+    text-align: center;
+    cursor: pointer;
+    min-height: 250px;
+    align-content: center;
+    align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.pintar2{
     background:#49618f;
     border-radius: 10px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .preloader {
@@ -133,7 +180,7 @@ h2{
 
 }
 
-.actiL{
+.activo{
     background-color: rgb(139, 78, 27);
     border-radius: 0px 10px 10px 0px;
     font-size: 2rem;
@@ -143,6 +190,74 @@ h2{
     
 }
 
+.activoI{
+    background-color: rgb(201 215 71);
+    border-radius: 40px;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px;
+    float: right;
+    
+}
+
+.inactivo{
+    display: none;
+}
+
 .padreJ{
     max-height: 100px;
+}
+
+.tabla{
+    margin-top:15px;
+}
+
+.flotante2{
+    z-index: 2;
+    position: absolute;
+    top: 49%;
+    left: 28%;
+    transform: translate(-50%, -50%);
+    max-width: 300px;
+    background:#49618f;
+    border-radius: 10px;
+}
+
+.bA{
+    margin-top: 25%;
+}
+
+@media (max-width:1200px){
+    .flotante2, .pintar{
+        max-height: 250px;
+        overflow: auto;
+    }
+}
+
+.tarjeta{
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #7d3f85;
+}
+
+.imageT{
+    max-width: 60%;
+    border-radius: 40%;
+}
+
+.margenT{
+    margin-top: 8rem;
+}
+
+.cerrar{
+    font-size: 40px;
+    cursor: pointer;
+    float: right;
+    display: inline-block;
+}
+
+.imagenE{
+    max-width: 50px;
+    
 }
