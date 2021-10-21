@@ -70,15 +70,67 @@ class JugadoresModelo{
     public function verificarJugadoresActivos($codigoUser)
     {
         global $DB;
-        $query = "SELECT id_partida FROM jugadores WHERE codigo LIKE ?";
-        $rel = $DB->query($query, array( $codigoUser ));
+        $query = "SELECT J.id_partida id_partida, J.id_jugador id_jugador, P.codigo codigo_partida FROM jugadores J LEFT JOIN partidas P ON P.id_partida = J.id_partida
+         WHERE J.codigo LIKE ?";
+        $jugadores_data = $DB->query($query, array( $codigoUser ));
         
         $marca_time = time() - 120; /* Vamos a verificar usuariros que tengan más de 120 segundos inactivos */
-        $query = "UPDATE rel_partida_jugador_cartas SET activo = 0 WHERE id_jugador IN (
-            SELECT id_jugador FROM jugadores WHERE updated_at <= ?
-        )";
-        $rel = $DB->query($query, array( $marca_time ));
+
+        /* Ahora hacemos el análisis por jugador individual */
+        $query = "SELECT * FROM rel_partida_jugador_cartas WHERE id_jugador IN (
+            SELECT id_jugador FROM jugadores WHERE updated_at < ? AND id_jugador IN (SELECT id_jugador FROM rel_partida_jugador_cartas WHERE id_partida = ?) 
+        ) AND activo = 1";
+        $rel2 = $DB->query($query, array( $marca_time, $jugadores_data[0]["id_partida"] )); 
         
+        $query = "UPDATE rel_partida_jugador_cartas SET activo = 0 WHERE id_jugador IN (
+            SELECT id_jugador FROM jugadores WHERE updated_at < ?
+        )";
+        $rel = $DB->query($query, array( $marca_time )); /* LISTO: jugadores inactivado */
+
+        if(isset($rel2[0]["id_jugador"])):
+            
+            /* Procedemos a revelarle a los otros jugadores, las cartas de este jugador inactivo */
+            $partidas = new Partidas();
+            $dataPartida = $partidas->getPartidaPorCodigo($jugadores_data[0]["codigo_partida"]);
+    
+            if($dataPartida["estado"] == 1): /* Si la partida está activa, entonces mostramos cartas */
+        
+                $contrincantes = array();
+                $adversarios_array = $this->jugadoresContrincantes( $codigoUser );
+                foreach($adversarios_array as $cadaAdversario):
+                    $contrincantes[] = $cadaAdversario["id_jugador"];
+                endforeach;
+    
+                /* Saber las cartas del jugador que estoy inactivando */
+                $partidasJugadorCartas = new PartidaJugadorCartas();
+                $dataCartas = $partidasJugadorCartas->consultarCartasPartidaPorJugador($jugadores_data[0]["id_jugador"], $jugadores_data[0]["codigo_partida"]);
+                
+                foreach($contrincantes as $cadaContr):
+                    $partidaJugadorTabla = new PartidaJugadorTabla();
+                    $datos = array(
+                        $jugadores_data[0]["id_partida"],
+                        $cadaContr,
+                        $dataCartas[0]["idcarta1"],
+                        $dataCartas[0]["idcarta2"],
+                        $dataCartas[0]["idcarta3"],
+                        $dataCartas[0]["idcarta4"],
+                        $jugadores_data[0]["id_jugador"]
+    
+                    );
+                    $partidaJugadorTabla->insertarCartasPorContrincante($datos);
+                endforeach;
+    
+    
+                /*
+                3. insertarlos en rel_partida_jugador_tablas para TODOS los adversarios
+                */
+    
+    
+            endif; /* datapartida estado 1 */
+        endif;
+
+
+
     }
 
     public function jugadoresContrincantes( $codigo )

@@ -94,7 +94,7 @@ if(isset($_POST["processing"])):
 
                     $salida = array(
                         "codigo" => 202, /* Partida activa */
-                        "mensaje" => "Partida en progreso...",
+                        "mensaje" => "Partida en progreso..." . $codigo . " _ " . time(),
                         "frontend" => $dataPartidaTotal,
                     );
                 break;

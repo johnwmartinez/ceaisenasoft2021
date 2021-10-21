@@ -78,6 +78,11 @@ class PartidasJugadorCartasModelo{
         endif;
     }
 
+    public function inactivarParticipante( $codigo ){
+        global $DB;
+        $query = "UPDATE ";
+    }
+
 
 
 
