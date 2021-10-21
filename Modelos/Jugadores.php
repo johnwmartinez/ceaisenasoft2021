@@ -81,4 +81,30 @@ class JugadoresModelo{
         
     }
 
+    public function jugadoresContrincantes( $codigo )
+    {
+        global $DB;
+
+        /* Primero traemos la información de la partida a la que pertenece el jugador consultante */
+        $partidas = new Partidas();
+        $dataPartida = $partidas->getPartidaPorCodigoUsuario( $codigo );
+        
+        /* Ahora traemos la info de todos los contrincantes de esa partida_id */
+        $query = "SELECT 
+            RPJC.id_jugador id_jugador,
+            J.nombre nombre
+        FROM rel_partida_jugador_cartas RPJC
+            LEFT JOIN jugadores J ON J.id_jugador = RPJC.id_jugador AND RPJC.activo = 1
+        WHERE 1=1
+            AND RPJC.id_partida = ? 
+            AND J.codigo NOT LIKE ?
+            AND RPJC.activo = 1
+        ";
+        $res = $DB->query( $query, array( 
+            $dataPartida["id_partida"],
+            $codigo
+         ) );
+        return $res; /* Devuelvo array con todos los participantes de la partida */
+    }
+
 }
