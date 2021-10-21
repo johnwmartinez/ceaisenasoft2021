@@ -8,6 +8,7 @@ class JugadoresModelo{
 
     }
 
+    /* Creamos el jugador */
     function crearJugador($nombre, $codigoPartida)
     {
         global $DB;
@@ -25,6 +26,7 @@ class JugadoresModelo{
 
     }
 
+    /* Traer la data del jugador por código (session) */
     public function getJugadorByCodigo($codigo){
 
         global $DB;
@@ -34,16 +36,75 @@ class JugadoresModelo{
     
     }
     
-    
+    /* Función que actualiza la marca time en el jugador para verificar que esté activo */
     public function updated_atTime($codigo)
     {
         global $DB;
+        /* Primero verificamos si el usuario, aunque tenga session, quedó inactivo */
+        $activo = $this->usuarioActivoPorCodigo($codigo);
+        /* Actualizamos marca time en el usuario */
+        if($activo === 1):
+            $query = "UPDATE jugadores SET updated_at = ? WHERE codigo LIKE ? ";
+            $rel = $DB->query($query, array(
+                time(),
+                $codigo
+            ));
+        else:
+            unset($_SESSION["codigo"]); /* Usuario inactivo. Borramos variable sesión para crear una nueva */
+        endif;
+    }
 
-        $query = "UPDATE jugadores SET updated_at = ? WHERE codigo LIKE ? ";
-        $rel = $DB->query($query, array(
-            time(),
+    /* Verificar si un usuario está activo */
+    public function usuarioActivoPorCodigo($codigo)
+    {
+        global $DB;
+        /* Intersectamos dos tablas para consultar por código */
+        $query = "SELECT RPJC.activo activo FROM rel_partida_jugador_cartas RPJC 
+            LEFT JOIN jugadores J ON J.id_jugador = RPJC.id_jugador
+            WHERE J.codigo LIKE ? ";
+        $res  = $DB->query($query, array( $codigo ));
+        return $res[0]["activo"];
+    }
+
+    /* verificar que los usuarios de una partida estén activos */
+    public function verificarJugadoresActivos($codigoUser)
+    {
+        global $DB;
+        $query = "SELECT id_partida FROM jugadores WHERE codigo LIKE ?";
+        $rel = $DB->query($query, array( $codigoUser ));
+        
+        $marca_time = time() - 120; /* Vamos a verificar usuariros que tengan más de 120 segundos inactivos */
+        $query = "UPDATE rel_partida_jugador_cartas SET activo = 0 WHERE id_jugador IN (
+            SELECT id_jugador FROM jugadores WHERE updated_at <= ?
+        )";
+        $rel = $DB->query($query, array( $marca_time ));
+        
+    }
+
+    public function jugadoresContrincantes( $codigo )
+    {
+        global $DB;
+
+        /* Primero traemos la información de la partida a la que pertenece el jugador consultante */
+        $partidas = new Partidas();
+        $dataPartida = $partidas->getPartidaPorCodigoUsuario( $codigo );
+        
+        /* Ahora traemos la info de todos los contrincantes de esa partida_id */
+        $query = "SELECT 
+            RPJC.id_jugador id_jugador,
+            J.nombre nombre
+        FROM rel_partida_jugador_cartas RPJC
+            LEFT JOIN jugadores J ON J.id_jugador = RPJC.id_jugador AND RPJC.activo = 1
+        WHERE 1=1
+            AND RPJC.id_partida = ? 
+            AND J.codigo NOT LIKE ?
+            AND RPJC.activo = 1
+        ";
+        $res = $DB->query( $query, array( 
+            $dataPartida["id_partida"],
             $codigo
-        ));
+         ) );
+        return $res; /* Devuelvo array con todos los participantes de la partida */
     }
 
 }

@@ -14,5 +14,33 @@ class Partidas extends PartidasModelo{
             return true;
         return false;
     }
+
+    /* Creamos la lógica deuna partida Total abierta */
+    public function dataPartidaTotal($codigo) 
+    {
+        $jugadores = new Jugadores();
+        $partidas = new Partidas();
+        $partidasPreguntas = new PartidasPreguntas();
+        /* 1. Determinar los jugadores diferentes a mi  */
+        $contrincantes = $jugadores->jugadoresContrincantes( $codigo ); /* Listos los contrincantes */
+        
+        /* 2. Quién tiene el turno */
+        $turno = $partidas->quienTieneElTurno( $codigo );
+        if($turno["yomismo"] === $turno["turno"]):
+            $turno["nombre"] = "Es tu turno";
+        endif;
+
+        /* 3. Traer la última pregunta */
+        $pregunta = $partidasPreguntas->preguntaReciente($codigo);
+
+        /* 4. Tabla del jugador con cartas tachadas */
+        
+        $salida = array(
+            "contrincantes" => $contrincantes,
+            "turno" => $turno,
+            "preguntas" => $pregunta,
+        );
+        return $salida;
+    }
    
 }

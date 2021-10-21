@@ -22,6 +22,9 @@ require_once("Controladores/PartidaJugadorCartasControlador.php");
 require_once("Modelos/PartidaJugadorTabla.php");
 require_once("Controladores/PartidaJugadorTablaControlador.php");
 
+require_once("Modelos/PartidasPreguntas.php");
+require_once("Controladores/PartidasPreguntasControlador.php");
+
 
 ?>
 <!DOCTYPE html>
@@ -32,6 +35,19 @@ require_once("Controladores/PartidaJugadorTablaControlador.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encuentra el Bug - Juego realizado en PHP y Javascript</title>
+    <style>
+        h1, h2, h3, h4, h5
+        {
+            margin:0 auto;
+            margin-bottom:10px;
+        }
+        .arenaPartida > div
+        {
+            background:#eee;
+            margin-bottom:10px;
+            padding:10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -84,6 +100,27 @@ if(isset($_GET["limpiar"]))
         </div>
     </div>
 
+    <div class="arenaPartida">
+        <div class="arenajugadores">
+        </div>
+        <div class="arenaTurno">
+        </div>
+        <div class="arenaPreguntaJugador">
+        </div>
+        <div class="arenaTabla">
+        </div>
+        <div class="arenaAtaque">
+            <div class="arenaAcusacion">
+            </div>
+            <div class="arenaPreguntaIndividual">
+            </div>
+        </div>
+        <div class="arenaCartas">
+        </div>
+        <div class="arenaAyudas">
+        </div>
+    </div>
+
     <div class="arena_pruebas">
         Aquí vamos a imprimir como van las pruebas de mi aplicativo
     </div>
@@ -101,6 +138,10 @@ if(isset($_GET["limpiar"]))
                 mostrar_esconder('.creacionPartidas', 'mostrar')
             else
                 mostrar_esconder('.creacionPartidas', 'esconder')
+            if(conf.arena_partidas == 1)
+                mostrar_esconder('.arenaPartida', 'mostrar')
+            else
+                mostrar_esconder('.arenaPartida', 'esconder')
         
         }
         function consultaAPI() {
@@ -118,16 +159,42 @@ if(isset($_GET["limpiar"]))
                         
                         // Variables de diseño
                         let pantalla_inicial = 0
+                        let arena_partidas = 0
 
                         // Codigo 100: Mostramos la pantalla inicial
                         if(data.codigo == 100){
                             document.querySelector('.arena_pruebas').innerHTML = 'Mostramos pantalla inicial porque no tiene variable sesión creada'
                             pantalla_inicial = 1
                         }
-                        if(data.codigo == 100){
-                            document.querySelector('.arena_pruebas').innerHTML = 'Mostramos pantalla inicial porque no tiene variable sesión creada'
+                        if(data.codigo == 202){ /* Partida en progreso */
+                            document.querySelector('.arena_pruebas').innerHTML = data.mensaje
+                            arena_partidas = 1
+                            /* Armamos el Frontend */
+                            /* 1. Jugadores */
+                            let arenaJugadores = '<h3>Contrincantes: </h3>'
+                            data.frontend.contrincantes.forEach(function( cadaU ){
+                                arenaJugadores += `<div class="jugadorIndv">${cadaU.nombre}</div>`
+                            })
+                            document.querySelector('.arenajugadores').innerHTML = arenaJugadores
+
+                            /* 2. Turno */
+                            let arenaTurno = '<h3>Turno de: </h3>'
+                            arenaTurno += `<div class="jugadorIndv">${data.frontend.turno.nombre}</div>`
+                            document.querySelector('.arenaTurno').innerHTML = arenaTurno
+                            
+                            /* 3. Última pregunta de un jugador */
+                            let arenaPreguntaJugador = '<h3>Pregunta: </h3>';
+                            if(data.frontend.preguntas[0] == 0){
+                                arenaPreguntaJugador = `</div>`
+                            }else{
+
+                                arenaPreguntaJugador += `<div class="jugadorIndv">${data.frontend.preguntas.nombre} preguntó por las cartas ${data.frontend.preguntas.carta_1}, ${data.frontend.preguntas.carta_2} y ${data.frontend.preguntas.carta_3}</div>`
+                            }
+                            document.querySelector('.arenaPreguntaJugador').innerHTML = arenaPreguntaJugador
+
+                            /* 4. La tabla del jugador */
                         }
-                        const codigos_respuesta = [201, 202, 203] /* Códigos de respuestas de estado de partida */
+                        const codigos_respuesta = [201, 203] /* Códigos de respuestas de estado de partida */
                         if(codigos_respuesta.includes( data.codigo )){
                             document.querySelector('.arena_pruebas').innerHTML = data.mensaje
                         }
@@ -135,6 +202,7 @@ if(isset($_GET["limpiar"]))
                         /* Cambios de diseño */
                         let salidaDiseno = {
                             pantalla_inicial: pantalla_inicial,
+                            arena_partidas: arena_partidas,
                         };
                         estructuraFrontend(salidaDiseno)
 

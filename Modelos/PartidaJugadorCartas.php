@@ -22,7 +22,7 @@ class PartidasJugadorCartasModelo{
         return $res;
     }
 
-    public function repartirCartasJugador($codigo, $idjugador, $total_cartas){
+    public function repartirCartasJugador($codigo, $idjugador, $total_cartas){ /* $codigo es de la partida */
 
         global $DB;
 
@@ -69,6 +69,13 @@ class PartidasJugadorCartasModelo{
         /*Inserto los registros a la tabla rel_partida_jugador_tablas*/
         $partidaJugadorTabla = new PartidaJugadorTabla();
         $partidaJugadorTabla->insertarPartidaJugadorTabla($codigo, $idjugador);
+
+        /* Verificamos si los turnos ya están llenos para arrancar la partida */
+        if(count($ordenes_sql) == 3): /* Si es == a 3 ya está lleno, porque después del insert quedan en 4 */
+            /* Activamos la partida como "iniciada" */
+            $partidas = new Partidas();
+            $partidas->activarPartida($codigo); /* Activamos la partida como iniciada */
+        endif;
     }
 
 
