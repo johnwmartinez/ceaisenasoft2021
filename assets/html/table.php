@@ -37,7 +37,7 @@
                 <!-- Turnos -->
                     <div class="col-md-3 turno">
                         <h2>Turno de: Juan</h2>
-                        <form action="" class="form1">
+                        <form action="" class="form1 formPreguntar">
                             <input name="programadores" type="radio" id="Antonio">
                             <input name="programadores" type="radio" id="Carlos">
                             <input name="programadores" type="radio" id="Carolina">
@@ -58,6 +58,29 @@
                             <input name="errores" type="radio" id="stack">
                             <input name="errores" type="radio" id="syntax">
                             <input type="submit" id="submit">
+
+                        </form>
+                        <form action="" class="form1 formAcusar">
+                            <input name="programadores" type="radio" id="AntonioA">
+                            <input name="programadores" type="radio" id="CarlosA">
+                            <input name="programadores" type="radio" id="CarolinaA">
+                            <input name="programadores" type="radio" id="JuanA">
+                            <input name="programadores" type="radio" id="JuanitaA">
+                            <input name="programadores" type="radio" id="ManuelA">
+                            <input name="programadores" type="radio" id="PedroA">
+                            <input name="modulos" type="radio" id="comprobanteA">
+                            <input name="modulos" type="radio" id="contabilidadA">
+                            <input name="modulos" type="radio" id="facturacionA">
+                            <input name="modulos" type="radio" id="nominaA">
+                            <input name="modulos" type="radio" id="reciboA">
+                            <input name="modulos" type="radio" id="usuariosA">
+                            <input name="errores" type="radio" id="ecodingA">
+                            <input name="errores" type="radio" id="error404A">
+                            <input name="errores" type="radio" id="memoryA">
+                            <input name="errores" type="radio" id="nullA">
+                            <input name="errores" type="radio" id="stackA">
+                            <input name="errores" type="radio" id="syntaxA">
+                            <input type="submit" id="submitA">
 
                         </form>
                     </div>
@@ -171,7 +194,8 @@
                             </div>
                         </div>
                    <!-- Fin eleccion preguntar acusar -->
-                    <div class="row pt-3" style="background-color: #49618f">
+                   <!-- Opcion preguntar -->
+                    <div class="row pt-3 preguntar" style="background-color: #49618f">
                     	<div id="sobre" class="sobre">
                 			<div class="col pintar2 ele11">
                 				<div class="row">
@@ -284,8 +308,128 @@
 		                            <div class="d-grid gap-2">
 		                                <label for="submit" class="btn btn-lg btn-success">Aceptar</label>
 		                            </div>
-                                    <div class="row py-3" style="background-color: #407671
-            		">
+                                    
+            		"></div></div></div></div>
+                    <!-- Fin opcion preguntar -->
+                    <!-- Opcion acusar -->
+                    <div class="row pt-3 acusar" style="background-color: #49618f">
+                    	<div id="sobre" class="sobre">
+                			<div class="col pintar2 ele11">
+                				<div class="row">
+		                            <div class="col-md-12 headerA">
+		                                <h2 >Haz tu acusación!</h2>
+		                            </div>
+		                        </div>
+		                        <div class="row fotosElec table-responsive">
+
+		                        	<table  class="table table-bordered table-condensed text-white">
+		                        		<thead>
+		                        			<tr>
+		                        				<td colspan="2">Personajes</td>
+		                        				<td colspan="2">Módulos</td>
+		                        				<td colspan="2">Errores</td>
+		                        			</tr>
+		                        		</thead>
+		                        		<tr>
+		                        			<td>
+		                        				<label for="AntonioA">
+		                        					<img src="../img/programadores/Antonio.png" title="Antonio" class="imagenE activoP" alt="">
+		                        					<br>
+		                                            Antonio
+		                        				</label>
+		                        			</td>
+		                        			<td>
+		                        				<label for="CarlosA">
+		                        					<img src="../img/programadores/Carlos.png" title="Carlos" class="imagenE" alt="">
+		                        					<br>
+		                                            Carlos
+		                        				</label>
+		                        			</td>
+                                            <td>
+                                                <label for="comprobanteA"><img src="../img/modulos/comprobante_contable.png" title="Comprobante contable" class="imagenE" alt="">
+                                               <br> Comprobante</p>
+                                                
+                                                </label>
+                                            </td>
+                                            <td><br> 
+                                            <label for="contabilidadA"><img src="../img/modulos/contabilidad.png" title="Contabilidad" class="imagenE" alt=""></label>
+		                                            <br> Contabilidad</p>
+                                            </td>
+                                            <td>
+                                            <label for="error404A"><img src="../img/errores/error404.png" title="Error 404" class="imagenE" alt=""></label>
+		                                            <br> Error 404
+                                            </td>
+                                            <td>
+                                            <label for="memoryA"><img src="../img/errores/memoryOutOfRange.png" title="Memory Out Of Range" class="imagenE" alt=""></label>
+		                                            <br> Memory Out Of Range
+                                            </td>
+		                        		</tr>
+		                        		<tr>
+                                        <td>
+		                        				<label for="CarolinaA">
+		                        					<img src="../img/programadores/Carolina.png" title="Carolina" class="imagenE" alt="">
+		                                            <br>
+		                                            Carolina
+		                        				</label>
+		                        			</td>
+		                        			<td>
+		                        				<label for="JuanA">
+		                        					<img src="../img/programadores/Juan.png" title="Juan" class="imagenE" alt="">
+		                                            <br>
+		                                            Juan
+		                        				</label>
+		                        			</td>
+		                        			<td><label for="facturacionA"><img src="../img/modulos/facturacion.png" title="Facturacion" class="imagenE" alt=""></label>
+		                                           <br>  Facturacion</td>
+		                        			<td><label for="nominaA"><img src="../img/modulos/nomina.png" title="Nomina" class="imagenE" alt=""></label>
+		                                           <br>  Nomina</td>
+		                        			<td><label for="nullA"><img src="../img/errores/nullPointer.png" title="Null Pointer" class="imagenE" alt=""></label>
+		                                            <br> Null Pointer</td>
+		                        			<td><label for="stackA"><img src="../img/errores/stackOverflow.png" title="Stack Overflow" class="imagenE" alt=""></label>
+		                                           <br>  Stack Overflow</td>
+		                        		</tr>
+		                        		<tr>
+                                        <td>
+		                        				<label for="JuanitaA">
+		                        					<img src="../img/programadores/Juanita.png" title="Juanita" class="imagenE" alt="">
+		                                            <br>
+		                                            Juanita
+		                        				</label>
+		                        			</td>
+		                        			<td>
+		                        				<label for="PedroA">
+		                        					<img src="../img/programadores/Pedro.png" title="Pedro" class="imagenE" alt="">
+		                                            <br>
+		                                            Pedro
+		                        				</label>
+		                        			</td>
+		                        			<td><label for="reciboA"><img src="../img/modulos/recibo.png" title="Recibo" class="imagenE" alt=""></label>
+		                                            <br> Recibo</td>
+		                        			<td><label for="usuariosA"><img src="../img/modulos/usuarios.png" title="Usuarios" class="imagenE" alt=""></label>
+		                                            <br> Usuarios</td>
+		                        			<td><label for="ecodingA"><img src="../img/errores/ecodingError.png" title="Ecoding Error" class="imagenE" alt=""></label>
+		                                            <br> Ecoding</td>
+		                        			<td><label for="syntaxA"><img src="../img/errores/syntaxError.png" title="Syntax Error" class="imagenE" alt=""></label>
+		                                            <br> Syntax error</td>
+		                        		</tr>
+		                        		<tr>
+		                        			<td><label for="ManuelA"><img src="../img/programadores/Manuel.png" title="Manuel" class="imagenE" alt="">
+                                            <br>
+                                              Manuel</td>
+                                        
+                                                </label>
+		                        		
+		                        	</table>
+
+
+		                            <div class="d-grid gap-2">
+		                                <label for="submitA" class="btn btn-lg btn-success">Aceptar</label>
+		                            </div>
+                                    
+            		</div></div></div></div>
+                    <!-- fin opcion acusar -->
+                    <!-- mis tarjetas -->
+                    <div class="row" style="background-color:#407671">
                         <div class="col-md-3 col-3">
                             <div class="tarjeta">
                                 <img src="../img/programadores/Antonio.png" alt="" class="imageT">
@@ -310,6 +454,8 @@
                                 <h3>Pedro</h3>
                             </div>
                         </div>
+                    </div>
+                    <!--Fin mis tarjetas  -->
                     </div>
 		                        </div>    
 		                    </div>
