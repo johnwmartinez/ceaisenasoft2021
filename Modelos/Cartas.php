@@ -38,6 +38,10 @@ class CartasModelo{
                 ,C2.nombre carta2
                 ,C3.nombre carta3
                 ,C4.nombre carta4
+                ,C1.ruta ruta1
+                ,C2.ruta ruta2
+                ,C3.ruta ruta3
+                ,C4.ruta ruta4
             FROM rel_partida_jugador_cartas RPJC 
                 LEFT JOIN jugadores J ON J.id_jugador = RPJC.id_jugador
                 LEFT JOIN cartas C1 ON C1.idcarta = RPJC.idcarta1

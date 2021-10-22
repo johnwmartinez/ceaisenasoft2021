@@ -35,422 +35,416 @@ require_once("Controladores/PartidasPreguntasControlador.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encuentra el Bug - Juego realizado en PHP y Javascript</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+    <link href="assets/css/style.css" rel="stylesheet">
+
     <style>
-        h1, h2, h3, h4, h5
-        {
-            margin:0 auto;
-            margin-bottom:10px;
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            margin: 0 auto;
+            margin-bottom: 10px;
         }
-        .arenaPartida > div
-        {
-            background:#eee;
-            margin-bottom:10px;
-            padding:10px;
+
+        .arenaPartida>div {
+            background: #eee;
+            margin-bottom: 10px;
+            padding: 10px;
         }
+
+        .modErrorConexion {
+            display: none;
+        }
+
+        .modEsperando {
+            display: none;
+        }
+
+        .mostrarModal {
+            display: block;
+        }
+
+        .printCodigo {
+            text-align: center;
+        }
+
+        .jugador:nth-child(1) .foto{ background-color:orange; }
+        .jugador:nth-child(2) .foto{ background-color:#207633; }
+        .jugador:nth-child(3) .foto{ background-color:#a32983; }
+        
+
+
     </style>
 </head>
+
 <body>
 
-<?php
-if(isset($_GET["limpiar"]))
-{
-    unset($_SESSION["codigo"]);
-}
-?>
-<div class="logo">
-    <img src="assets/img/logo.png" alt="Logo" style="width:250px; height:90px; object-fit:cover;"><br />
-    <?php echo time(); ?>
-</div>
+    <?php
+    if (isset($_GET["limpiar"])) {
+        unset($_SESSION["codigo"]);
+    }
+    ?>
+    <div class="logo">
+        <img src="assets/img/logo.png" alt="Logo" style="width:250px; height:90px; object-fit:cover;"><br />
+
+    </div>
 
     <div class="creacionPartidas">
 
-        <div class="contenedor" style="background:#eee;">
-            <?php
-            // if(!isset($_SESSION["codigo"]))
-            
-                ?>
-            <form action="#" method="POST" enctype="multipart/form-data" class="formAcceso">
-                <h2>Crear nueva partida</h2>
-                <div>
-                    <input type="text" name="nombre" value="" placeholder="Nombre del usuario" required>
+        <!-- Inicia formularios acceso -->
+        <div class="container contenedor">
+            <div class="row">
+                <!-- Inicio del apartado de nuevo juego -->
+                <div class="col-5 opcion elements">
+                    <h2>Nuevo Juego</h2>
+                    <div class="container ab">
+                        <div class="row form-group act">
+                            <label for="nombre" class="col-12 col-md-4 h3">Nombre</label>
+                            <div class="col-12 col-md-8">
+                                <form action="#" method="POST" enctype="multipart/form-data" class="formAcceso">
+                                    <div>
+                                        <input type="text" name="nombre" value="" placeholder="Nombre del usuario" required>
+                                    </div>
+                                    <div>
+                                        <label for="submit1" class="act container-img">
+                                            <img src="assets/img/play.png" class="img" alt="">
+                                        </label>
+                                        <input id="submit1" type="submit" value="Enviar" style="visibility:hidden;">
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <input type="submit" value="Enviar">
+                <!-- fin del apartado de nuevo juego -->
+                <!-- Inicio del apartado de unirse a un juego -->
+                <div class="col-2"></div>
+                <div class="col-5 opcion1 elements">
+                    <h2>Unirse a partida</h2>
+                    <div class="container ab">
+
+
+                        <form action="#" method="POST" enctype="multipart/form-data" class="formAcceso">
+
+                            <div class="row form-group act act2">
+                                <label for="nombre2" class="col-12 col-md-4 h3">Nombre</label>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="nombre2" name="nombre" value="" placeholder="Nombre del usuario" class="form-control" required>
+                                </div>
+                                <label for="codigo" class="col-12 col-md-4 h3">Codigo</label>
+                                <div class="col-12 col-md-8">
+                                    <input type="text" id="codigo" name="codigo" value="" maxlength="5" placeholder="Código de partida" pattern="^[A-Fa-f0-9]+$" class="form-control" required>
+                                </div>
+
+                                <input id="submit2" type="submit" style="display:none">
+                                <label for="submit2" class="act container-img">
+                                    <img src="assets/img/play.png" alt="" class="img">
+                                </label>
+                            </div>
+
+                        </form>
+
+                    </div>
                 </div>
-    
-            </form>
-                <?php
-           
-            ?>
+            </div>
+            <!-- fin del apartado de unirse a un juego -->
+            <!-- Ventana emergente de cargando -->
+
+            <div id="sobre1" class="row sobreIND modEsperando">
+                <div class="">
+                    <h2>Esperando otros jugadores</h2>
+                    <div class="printCodigo">
+                        Cargando, por favor espere...
+                    </div>
+                    <div class="padre">
+                        <div class="preloader"></div>
+                    </div>
+                </div>
+                <!-- Fin Ventana emergente de cargando -->
+                <!-- Ventana emergente de error -->
+                <div id="sobre2" class="row sobreIND modErrorConexion">
+                    <div class="">
+                        <h2>No se ha podido conectar con la partida</h2>
+                        <div class="padre">
+                            <div class="animate__animated animate__flipInX errorX"><i class="fas fa-times" style="font-size:100px"></i></div>
+                        </div>
+                    </div>
+                    <!-- Fin Ventana emergente de error -->
+
+                </div>
+            </div>
         </div>
-    
-        <div class="contenedor" style="background:#ddd;">
-            <form action="#" method="POST" enctype="multipart/form-data" class="formAcceso">
-                <h2>Ingresar a partida</h2>
-                <div>
-                    <input type="text" name="codigo" value="" maxlength="5" placeholder="Código de partida" pattern="^[A-Fa-f0-9]+$" required>
-                </div>
-                <div>
-                    <input type="text" name="nombre" value="" placeholder="Nombre del usuario" required>
-                </div>
-                <div>
-                    <input type="submit" value="Enviar">
-                </div>
-    
-            </form>
-        </div>
+        <!-- Termina formularios acceso -->
+
+
     </div>
 
     <div class="arenaPartida">
-        <div class="arenajugadores">
-        </div>
-        <div class="arenaTurno">
-        </div>
-        <div class="arenaPreguntaJugador">
-        </div>
-        <div class="arenaTabla">
-        </div>
-        <div class="arenaAtaque">
-            <div class="arenaAcusacion" style="margin-bottom:20px;">
-                <form action="#" name="acusacion">
-                    <div>
-                        <select name="programador" id="programador" required></select>
+
+
+        <!-- Inician estilo de Arena Partida -->
+
+
+        <div class="container contenedor">
+            <div class="row contenido">
+                <div>
+                    <div class="row">
+                        <!-- Jugadores -->
+                        <div class="col-md-3">
+                            <div class="arenajugadores">
+                            </div> 
+                        </div>
+                        <!-- Fin jugadores -->
+                        <!-- Turnos -->
+                        <div class="col-md-3 turno">
+                            <h3><span class="arenaTurno"></span></h3>
+
+
+                            <!-- PILAS PILAS PILAS -->
+                            <form action="" class="form1 formPreguntar">
+                                <input name="programadores" type="radio" id="Antonio">
+                                <input name="programadores" type="radio" id="Carlos">
+                                <input name="programadores" type="radio" id="Carolina">
+                                <input name="programadores" type="radio" id="Juan">
+                                <input name="programadores" type="radio" id="Juanita">
+                                <input name="programadores" type="radio" id="Manuel">
+                                <input name="programadores" type="radio" id="Pedro">
+                                <input name="modulos" type="radio" id="comprobante">
+                                <input name="modulos" type="radio" id="contabilidad">
+                                <input name="modulos" type="radio" id="facturacion">
+                                <input name="modulos" type="radio" id="nomina">
+                                <input name="modulos" type="radio" id="recibo">
+                                <input name="modulos" type="radio" id="usuarios">
+                                <input name="errores" type="radio" id="ecoding">
+                                <input name="errores" type="radio" id="error404">
+                                <input name="errores" type="radio" id="memory">
+                                <input name="errores" type="radio" id="null">
+                                <input name="errores" type="radio" id="stack">
+                                <input name="errores" type="radio" id="syntax">
+                                <input type="submit" id="submit">
+
+                            </form>
+                            <form action="" class="form1 formAcusar">
+                                <input name="programadores" type="radio" id="AntonioA">
+                                <input name="programadores" type="radio" id="CarlosA">
+                                <input name="programadores" type="radio" id="CarolinaA">
+                                <input name="programadores" type="radio" id="JuanA">
+                                <input name="programadores" type="radio" id="JuanitaA">
+                                <input name="programadores" type="radio" id="ManuelA">
+                                <input name="programadores" type="radio" id="PedroA">
+                                <input name="modulos" type="radio" id="comprobanteA">
+                                <input name="modulos" type="radio" id="contabilidadA">
+                                <input name="modulos" type="radio" id="facturacionA">
+                                <input name="modulos" type="radio" id="nominaA">
+                                <input name="modulos" type="radio" id="reciboA">
+                                <input name="modulos" type="radio" id="usuariosA">
+                                <input name="errores" type="radio" id="ecodingA">
+                                <input name="errores" type="radio" id="error404A">
+                                <input name="errores" type="radio" id="memoryA">
+                                <input name="errores" type="radio" id="nullA">
+                                <input name="errores" type="radio" id="stackA">
+                                <input name="errores" type="radio" id="syntaxA">
+                                <input type="submit" id="submitA">
+
+                            </form>
+                        </div>
+                        <!-- Fin Turnos -->
+                        <!-- Ultima pregunta -->
+                        <div class="col-md-6 arenaPreguntaJugador"> 
+                        </div>
+
                     </div>
-                    <div>
-                        <select name="modulo" id="modulo" required></select>
+                    <!-- Fin Ultima pregunta -->
+
+
+                    <!--lista -->
+                    <div class="row">
+
+                        <div class="col-md-4" style="background-color: #d1c5a3">
+                            <div class="arenaTabla"></div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <!-- Eleccion preguntar acusar -->
+                            <div class="arenaAtaque">
+
+                                <div class="row elecc">
+                                    <div class="col-md-6 ele1">
+                                        <h1><a href="#" class="btnPreguntar">Preguntar</a></h1>
+                                    </div>
+                                    <div class="col-md-6 ele2">
+                                        <h1><a href="#" class="btnAcusar">Acusar</a></h1>
+                                    </div>
+                                </div>
+                                <!-- Fin eleccion preguntar acusar -->
+                                <!-- Opcion preguntar -->
+                                <div class="row pt-3 preguntarVentana" style="background-color: #49618f">
+                                    <div id="sobre" class="sobre">
+                                        <div class="col pintar2 ele11">
+                                            <div class="row">
+                                                <div class="col-md-12 headerP">
+                                                    <h2>Haz tu Pregunta!</h2>
+                                                </div>
+                                            </div>
+                                            <div class="row fotosElec table-responsive">
+    
+                                                <div class="salidaPreguntas">
+                                                
+                                                    <div class="arenaPreguntaIndividual">
+                                                        <form action="#" name="preguntar">
+                                                            <div>
+                                                                <select name="programador" id="programador2" required></select>
+                                                            </div>
+                                                            <div>
+                                                                <select name="modulo" id="modulo2" required></select>
+                                                            </div>
+                                                            <div>
+                                                                <select name="tipo_error" id="tipo_error2" required></select>
+                                                            </div>
+                                                            <div>
+                                                                <input type="submit" value="Preguntar?">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>   
+    
+                                                <div class="d-grid gap-2">
+                                                    <label for="submit" class="btn btn-lg btn-success">Aceptar</label>
+                                                </div>
+    
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Fin opcion preguntar -->
+                                <!-- Opcion acusar -->
+                                <div class="row pt-3 acusarVentana" style="background-color: #49618f">
+                                    <div id="sobre" class="sobre">
+                                        <div class="col pintar2 ele11">
+                                            <div class="row">
+                                                <div class="col-md-12 headerA">
+                                                    <h2>Haz tu acusación!</h2>
+                                                </div>
+                                            </div>
+                                            <div class="row fotosElec table-responsive">
+    
+                                                <div class="arenaAcusacion" style="margin-bottom:20px;">
+                                                    <form action="#" name="acusacion">
+                                                        <div>
+                                                            <select name="programador" id="programador" required></select>
+                                                        </div>
+                                                        <div>
+                                                            <select name="modulo" id="modulo" required></select>
+                                                        </div>
+                                                        <div>
+                                                            <select name="tipo_error" id="tipo_error" required></select>
+                                                        </div>
+                                                        <div>
+                                                            <input type="submit" value="Acusar!">
+                                                        </div>
+                                                    </form>
+                                                </div>
+    
+    
+                                                <div class="d-grid gap-2">
+                                                    <label for="submitA" class="btn btn-lg btn-success">Aceptar</label>
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- fin opcion acusar -->
+                            <!-- mis tarjetas -->
+                            <div class="row arenaCartas" style="background-color:#407671">
+                            </div>
+                            <!--Fin mis tarjetas  -->
+                        </div>
                     </div>
-                    <div>
-                        <select name="tipo_error" id="tipo_error" required></select>
-                    </div>
-                    <div>
-                        <input type="submit" value="Acusar!">
-                    </div>
-                </form>
+                </div>
             </div>
-            <div class="arenaPreguntaIndividual">
-                <form action="#" name="preguntar">
-                    <div>
-                        <select name="programador" id="programador2" required></select>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 pintar">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h2>Instrucciones</h2>
                     </div>
-                    <div>
-                        <select name="modulo" id="modulo2" required></select>
+                    <div class="col-md-2">
+                        <i class="far fa-times-circle cerrar"></i>
                     </div>
-                    <div>
-                        <select name="tipo_error" id="tipo_error2" required></select>
+                </div>
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
-                    <div>
-                        <input type="submit" value="Preguntar?">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="padin">
+                                <h3>El sistema selecciona aleatoriamente un programador, un módulo del sistema y un tipo de error, estos se dejan de manera secreta en el juego, dichas cartas son las que debemos adivinar dentro del desarrollo del juego. Una vez conectados todos los jugadores, el sistema revuelve (baraja), aleatoriamente los 3 tipos de cartas y las reparte equitativamente a los jugadores (4 para cada uno), el juego inicia con la persona que creó el juego y los turnos van en el orden de las conexiones de los demás jugadores.</h3>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="padin">
+                                <h3>En tu turno puedes:</h3>
+                                <h3>-Hacer una pregunta, sospechando de un programador, un modulo y el error que generó el problema en el sistema. Si los jugadores tienen alguna de las cartas sobre las que has preguntado, debe enseñarte una de ellas en secreto. ¡Nunca te deben enseñar más de una carta!, si no tiene ninguna de las cartas sobre las que has preguntado, simplemente dirá: “No puedo contestar”</h3>
+                                <h3>-Hacer una acusación, seleccionando un programador, un módulo y un error. Si tu acusación es correcta, serás el ganador del juego, pero si no es cierta, simplemente vas a perder el turno</h3>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="padin">
+                                <h3>En la hoja de notas el sistema va registrando los datos de las cartas que puede determinar qué tiene otro jugador, para posteriormente poder hacer una acusación</h3>
+                                <h3>La hoja de notas te va a ayudar a tener mas certeza a la hora de hacer una acusación, dado que vas descartando las cartas que tienen los otros jugadores.</h3>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="arenaCartas">
-        </div>
+
+
+
+
+        <!-- Termina estilo de Arena Partida -->
+
+
+
+
+
+        
+
         <div class="arenaAyudas">
             <button class="btnAyuda">Boton Ayuda</button>
         </div>
     </div>
 
     <div class="arena_pruebas">
-        Aquí vamos a imprimir como van las pruebas de mi aplicativo
     </div>
-
-    <script>
-        function mostrar_esconder(clase, accion){
-            let action = (accion == 'mostrar') ? 'block' : 'none'
-            document.querySelector(clase).style.display = action
-        }
-
-        function estructuraFrontend( conf )
-        {
-            /* Módulo 1: Pantalla inicial */
-            if(conf.pantalla_inicial == 1)
-                mostrar_esconder('.creacionPartidas', 'mostrar')
-            else
-                mostrar_esconder('.creacionPartidas', 'esconder')
-            if(conf.arena_partidas == 1)
-                mostrar_esconder('.arenaPartida', 'mostrar')
-            else
-                mostrar_esconder('.arenaPartida', 'esconder')
-        
-        }
-        let ventanaEstatica = 0
-        function consultaAPI() {
-
-            const data = new FormData();
-            data.append('processing', 'SENASOFT');
-
-            fetch('api/', {
-                    method: 'POST',
-                    body: data
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        
-                        // Variables de diseño
-                        let pantalla_inicial = 0
-                        let arena_partidas = 0
-
-                        // Codigo 100: Mostramos la pantalla inicial
-                        if(data.codigo == 100){
-                            document.querySelector('.arena_pruebas').innerHTML = 'Mostramos pantalla inicial porque no tiene variable sesión creada'
-                            pantalla_inicial = 1
-                        }
-                        if(data.codigo == 202){ /* Partida en progreso */
-                            document.querySelector('.arena_pruebas').innerHTML = data.mensaje
-                            arena_partidas = 1
-                            /* Armamos el Frontend */
-                            /* 1. Jugadores */
-                            let arenaJugadores = '<h3>Contrincantes: </h3>'
-                            data.frontend.contrincantes.forEach(function( cadaU ){
-                                arenaJugadores += `<div class="jugadorIndv">${cadaU.nombre}</div>`
-                            })
-                            document.querySelector('.arenajugadores').innerHTML = arenaJugadores
-
-                            /* 2. Turno */
-                            let arenaTurno = '<h3>Turno de: </h3>'
-                            arenaTurno += `<div class="jugadorIndv">${data.frontend.turno.nombre}</div>`
-                            document.querySelector('.arenaTurno').innerHTML = arenaTurno
-                            
-                            /* 3. Última pregunta de un jugador */
-                            let arenaPreguntaJugador = '<h3>Pregunta: </h3>';
-                            if(data.frontend.preguntas[0] == 0){
-                                arenaPreguntaJugador = `</div>`
-                            }else{
-                                
-                                arenaPreguntaJugador += `<div class="jugadorIndv">${data.frontend.preguntas.nombre} preguntó por las cartas ${data.frontend.preguntas.carta_1}, ${data.frontend.preguntas.carta_2} y ${data.frontend.preguntas.carta_3}</div>`
-                            }
-                            document.querySelector('.arenaPreguntaJugador').innerHTML = arenaPreguntaJugador
-                            
-                            /* 4. La tabla del jugador */
-                            let arenaTabla = '<h3>Tabla de cartas: </h3>'
-                            arenaTabla += `<div class="tabla-html">${data.frontend.tablas}</div>`
-                            document.querySelector('.arenaTabla').innerHTML = arenaTabla
-                            
-                            /* 5. Categorías para los selects */
-                            if(ventanaEstatica == 0){
-                                /* Llenamos el select de programador */
-                                let programador = '<option></option>'
-                                data.frontend.categorias.programador.forEach(function( cadaU ){
-                                    programador += `
-                                    <option value="${cadaU.idcarta}">${cadaU.nombre}</option>
-                                    `
-                                })
-                                document.querySelectorAll('select[name=programador]').forEach(function( cadaSelect ){
-                                    cadaSelect.innerHTML = programador
-                                })
-                                /* Llenamos el select de modulo */
-                                let modulo = '<option></option>'
-                                data.frontend.categorias.modulo.forEach(function( cadaU ){
-                                    modulo += `
-                                    <option value="${cadaU.idcarta}">${cadaU.nombre}</option>
-                                    `
-                                })
-                                document.querySelectorAll('select[name=modulo]').forEach(function( cadaSelect ){
-                                    cadaSelect.innerHTML = modulo
-                                })
-                                /* Llenamos el select de tipo error */
-                                let tipo_error = '<option></option>'
-                                data.frontend.categorias.tipo_error.forEach(function( cadaU ){
-                                    tipo_error += `
-                                    <option value="${cadaU.idcarta}">${cadaU.nombre}</option>
-                                    `
-                                })
-                                document.querySelectorAll('select[name=tipo_error]').forEach(function( cadaSelect ){
-                                    cadaSelect.innerHTML = tipo_error
-                                })
-                            }
-
-                            if(data.frontend.turno.turno == data.frontend.turno.yomismo){
-                                document.querySelector('.arenaAtaque').style.display = 'block'
-                            }else{
-                                document.querySelector('.arenaAtaque').style.display = 'none'
-                            }
-
-                            /* 6. Cartas del usuario */
-                            if(ventanaEstatica == 0){
-                                let arenaCartas = '<h3>Cartas jugador: </h3>'
-                                arenaCartas += `<div class="carta-${data.frontend.cartas.idcarta1}">${data.frontend.cartas.carta1}</div>`
-                                arenaCartas += `<div class="carta-${data.frontend.cartas.idcarta2}">${data.frontend.cartas.carta2}</div>`
-                                arenaCartas += `<div class="carta-${data.frontend.cartas.idcarta3}">${data.frontend.cartas.carta3}</div>`
-                                arenaCartas += `<div class="carta-${data.frontend.cartas.idcarta4}">${data.frontend.cartas.carta4}</div>`
-                                document.querySelector('.arenaCartas').innerHTML = arenaCartas
-                            }
-                            ventanaEstatica = 1
-                        }
-                        if(data.codigo == 203){
-                            const salida = `
-                                ${data.mensaje}
-                                <a href="#" class="reiniciar_partida">Reiniciar partida</a>
-                            `;
-                            document.querySelector('.arena_pruebas').innerHTML = salida
-                            document.querySelector('.reiniciar_partida').addEventListener('click', function( event ){
-                                event.preventDefault()
-                                reiniciar_partida()
-                            })
-
-                        }
-                        const codigos_respuesta = [201] /* Códigos de respuestas de estado de partida */
-                        if(codigos_respuesta.includes( data.codigo )){
-                            document.querySelector('.arena_pruebas').innerHTML = data.mensaje
-                        }
-
-                        /* Cambios de diseño */
-                        let salidaDiseno = {
-                            pantalla_inicial: pantalla_inicial,
-                            arena_partidas: arena_partidas,
-                        };
-                        estructuraFrontend(salidaDiseno)
-                    } else {
-                        throw "Error en consulta AJAX";
-                    }
-
-                })
-                .then(function(texto) {
-                    //console.log(texto);
-                })
-                .catch(function(err) {
-                    console.log(err);
-                });
-            
-        }
-        const Intervalo = setInterval("consultaAPI()", 5000)
-        consultaAPI()  // Inicializamos la llamada a la función que se va a ejecutar cada 5 segundos
-
-
-        function ingresarNuevoUsuario(datos)
-        {
-            /* Función en JS que permite el acceso a un nuevo usuario 
-            (en partida nueva o existente) */
-            const nombre = datos.querySelector('input[name=nombre]').value
-            const codigo = (datos.querySelector('input[name=codigo]')) ? datos.querySelector('input[name=codigo]').value : undefined
-       
-            /* Construímos el FormData para envío por post */
-            const data = new FormData();
-            data.append('accion', 'ingresarNuevoUsuario');
-            if(!(codigo == undefined)){
-                data.append('codigo', codigo);
-            }
-            data.append('nombre', nombre);
-
-            fetch('api/', {
-                    method: 'POST',
-                    body: data
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        /* Analizamos el regreso de data para saber en qué pantalla estamos */
-                        return data
-                        consultaAPI()
-                    } else {
-                        throw "Error en consulta AJAX";
-                    }
-
-                })
-                .then(function(texto) {
-                    console.log(texto);
-                })
-                .catch(function(err) { /* Capturo el error, si lo hay */
-                    console.log(err);
-                });
-        }
-
-        function acusar_preguntar(datos, metodo)
-        {
-            /* Construimos las variables */
-            console.log(datos)
-            const programador = datos.querySelector('select[name=programador]').value
-            const modulo = datos.querySelector('select[name=modulo]').value
-            const tipo_error = datos.querySelector('select[name=tipo_error]').value
-
-            /* Construímos el FormData para envío por post */
-            const data = new FormData();
-            if(metodo == "acusar"){
-                data.append('accion', 'acusarUsuario');
-            }
-            if(metodo == "preguntar"){
-                data.append('accion', 'preguntarCartas');
-            }
-            data.append('programador', programador);
-            data.append('modulo', modulo);
-            data.append('tipo_error', tipo_error);
-
-            fetch('api/', {
-                    method: 'POST',
-                    body: data
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        /* Analizamos el regreso de data para saber en qué pantalla estamos */
-                        //return data
-                        console.log(data)
-                        consultaAPI()
-                    } else {
-                        throw "Error en consulta AJAX";
-                    }
-
-                })
-                .then(function(texto) {
-                    console.log(texto);
-                })
-                .catch(function(err) { /* Capturo el error, si lo hay */
-                    console.log(err);
-                });
-        
-        }
-
-        function reiniciar_partida()
-        {
-
-            /* Construímos el FormData para envío por post */
-            const data = new FormData();
-            data.append('accion', 'reiniciarJuego');
-            fetch('api/', {
-                    method: 'POST',
-                    body: data
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        consultaAPI()
-                    } else {
-                        throw "Error en consulta AJAX";
-                    }
-                })
-                .then(function(texto) {
-                    console.log(texto);
-                })
-                .catch(function(err) { /* Capturo el error, si lo hay */
-                    console.log(err);
-                });
-        
-        }
-
-        /* Capturamos los formularios de acceso */
-        document.querySelectorAll('.formAcceso').forEach(function(cadaForm){
-            cadaForm.addEventListener('submit', function( event ){
-                event.preventDefault()
-                /* función JS para crear usuario por AJAX */
-                ingresarNuevoUsuario(this)
-            })
-        })
-
-        /* Botón de acusación */
-        document.querySelector('form[name=acusacion]').addEventListener('submit', function( event ){
-            event.preventDefault()
-            acusar_preguntar(this, 'acusar') /* Mandamos a la función la data del form */
-        })
-
-        /* Botón de preguntar cartas */
-        document.querySelector('form[name=preguntar]').addEventListener('submit', function( event ){
-            event.preventDefault()
-            acusar_preguntar(this, 'preguntar') /* Mandamos a la función la data del form */
-        })
-    </script>
-
+    <script src="assets/js/processing.js"></script>
 
 </body>
+
 </html>

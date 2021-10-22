@@ -99,10 +99,10 @@ class Jugadores extends JugadoresModelo{
             endif;
             
             
-
+            return $codigo;
 
         else:
-            return json_encode(array("error"));
+            return "error";
         endif;
     }
 }

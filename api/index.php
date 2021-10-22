@@ -126,6 +126,7 @@ if (isset($_POST["processing"])) :
                     // Pendiente;
                     $salida = array(
                         "codigo" => 201, /* Pendiente */
+                        "codigo_partida" => $partidaData["codigo"],
                         "mensaje" => "Pendiente de arrancar el juego ",
                     );
                     break;

@@ -19,7 +19,7 @@ class PartidaJugadorTabla extends PartidaJugadorTablaModelo{
         $todas_las_cartas = $cartas->obtenerTodasLasCartas();
         /* Armamos tabla HTML */
         $html = '
-        <table class="tabla">
+        <table class="table table-bordered table-hover table-sm tabla">
         ';
         foreach($todas_las_cartas as $cadaCarta){
             $poseedor = (isset($dataDeTabla[$cadaCarta["idcarta"]]))  ? $dataDeTabla[$cadaCarta["idcarta"]]["poseedor"] : '';
