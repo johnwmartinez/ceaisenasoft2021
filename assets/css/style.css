@@ -70,7 +70,8 @@ h2{
 }
 
 .sobre{
-    z-index: 2;
+    /*z-index: 2;*/
+    color: white;
 }
 
 .sobreIND{
@@ -123,11 +124,7 @@ h2{
 .ele11{
     background-color: #4242ad;
     text-align: center;
-    min-height: 250px;
-    align-content: center;
-    align-items: center;
-  display: flex;
-  justify-content: center;
+    /*min-height: 250px;*/
 }
 
 .ele2{
@@ -143,10 +140,10 @@ h2{
 .pintar2{
     background:#49618f;
     border-radius: 10px;
-    position: absolute;
+   /* position: absolute;
     top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);*/
 }
 
 .preloader {
@@ -291,3 +288,23 @@ h2{
     display:none;
 }
 
+.headerP{
+    background-color: #5f5fa9;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.fotosElec{
+    margin-top: 10px;
+}
+
+
+@media (max-width:768px){
+
+    .turno{
+        margin-top: initial;
+    }
+
+    .pregunta .h2 {
+        margin-top: initial;
+    }
+}

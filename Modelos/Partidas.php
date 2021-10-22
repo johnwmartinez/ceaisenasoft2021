@@ -133,5 +133,13 @@ class PartidasModelo{
         
     }
 
+    public function definirPartidaGanadora($idjugador, $codigopartida){
+        global $DB;
+
+        /*Se actualiza la partida con estado = 2 (Finalizada) y se inserta como ganador el id
+        del jugador que hizo la acusacion */
+        $query = "UPDATE partidas SET estado = 2, ganador = ? WHERE codigo LIKE ?";
+        $res = $DB->query($query, array( $idjugador, $codigopartida ));
+    }
 
 }
