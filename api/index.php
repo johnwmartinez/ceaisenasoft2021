@@ -31,11 +31,11 @@ require_once("../Controladores/PartidasPreguntasControlador.php");
 header('Content-Type: application/json');
 
 /* Definir procesos que de forma asíncrona serán consultados */
-if(isset($_POST["accion"])):
+if (isset($_POST["accion"])) :
     $post = $_POST;
     $post["codigo"] = isset($post["codigo"]) ? $post["codigo"] : NULL;  /* Definimos si código llega desdee JS */
-    switch($post["accion"]):
-    
+    switch ($post["accion"]):
+
         case "ingresarNuevoUsuario":
 
             /* Ingresamos un nuevo usuario al sistema */
@@ -46,15 +46,25 @@ if(isset($_POST["accion"])):
                     $post["codigo"]   /* código del jugador */
                 )
             );
-            echo(json_encode($salida));
-        break;
+            echo (json_encode($salida));
+            break;
+        case "acusarUsuario":
+            $codigo = $_SESSION["codigo"];  /* Código del USUARIO */
+            /* Métodos en la DB para acusar, es decir:
+                - Consultar si cartas coinciden
+                    - si coinciden gana el juego
+                    - sino cambia turno e inactiva preguntas
+            */
+            $salida = array(0);
+            echo (json_encode($salida));
+            break;
     endswitch;
 endif;
 
 
-if(isset($_POST["processing"])):
+if (isset($_POST["processing"])) :
     $salida = array();
-    if($_POST["processing"] == 'SENASOFT'):
+    if ($_POST["processing"] == 'SENASOFT') :
         /* A continuación viene el algoritmo que procesará el 'real time' de la aplicación 
         Disclaimer: sabemos que la app no es Real Time como tal, solo engaño al navegador para creerlo */
 
@@ -63,7 +73,7 @@ if(isset($_POST["processing"])):
         $partidas = new Partidas();
 
         /* Empezamos la lógica} */
-        if(isset($_SESSION["codigo"])):
+        if (isset($_SESSION["codigo"])) :
             $codigo = $_SESSION["codigo"];  /* Código del USUARIO */
             /* Usuario que ya está asignado a una partida */
             $jugadores->updated_atTime($codigo); /* Actualizamos el campo jugadores:updated_at */
@@ -73,21 +83,21 @@ if(isset($_POST["processing"])):
             $partidaData = $partidas->getPartidaPorCodigoUsuario($codigo); /* La Data de la partida */
             $partidaData["estado"] = (isset($partidaData["estado"])) ? $partidaData["estado"] : 999; /* Variable de validación */
 
-            switch($partidaData["estado"]):
+            switch ($partidaData["estado"]):
                 case 0:
                     // Pendiente;
                     $salida = array(
                         "codigo" => 201, /* Pendiente */
                         "mensaje" => "Pendiente de arrancar el juego ",
                     );
-                break;
+                    break;
                 case 2:
                     // Finalizada;
                     $salida = array(
                         "codigo" => 203, /* Partida finalizada */
                         "mensaje" => "Partida finalizada",
                     );
-                break;
+                    break;
                 case 1:
                     /* Partida en progreso */
                     $dataPartidaTotal = $partidas->dataPartidaTotal($codigo);
@@ -97,7 +107,7 @@ if(isset($_POST["processing"])):
                         "mensaje" => "Partida en progreso..." . $codigo . " _ " . time(),
                         "frontend" => $dataPartidaTotal,
                     );
-                break;
+                    break;
                 default:
                     unset($_SESSION["codigo"]); /* Quitamos la sesión porque no tiene partida asignada */
                     $salida = array(
@@ -106,13 +116,13 @@ if(isset($_POST["processing"])):
                     );
             endswitch;
 
-        else:
+        else :
             /* El usuario no está asignado a una partida */
             $salida = array(
                 "codigo" => 100, /* No ha ingresado */
                 "mensaje" => "",
             );
         endif;
-        echo(json_encode($salida));
+        echo (json_encode($salida));
     endif; // == SENASOFT
 endif; // isset processing

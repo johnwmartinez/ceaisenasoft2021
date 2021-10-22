@@ -58,7 +58,8 @@ if(isset($_GET["limpiar"]))
 }
 ?>
 <div class="logo">
-    <img src="assets/img/logo.png" alt="Logo" style="width:250px; height:90px; object-fit:cover;">
+    <img src="assets/img/logo.png" alt="Logo" style="width:250px; height:90px; object-fit:cover;"><br />
+    <?php echo time(); ?>
 </div>
 
     <div class="creacionPartidas">
@@ -110,14 +111,43 @@ if(isset($_GET["limpiar"]))
         <div class="arenaTabla">
         </div>
         <div class="arenaAtaque">
-            <div class="arenaAcusacion">
+            <div class="arenaAcusacion" style="margin-bottom:20px;">
+                <form action="#" name="acusacion">
+                    <div>
+                        <select name="programador" id="programador" required></select>
+                    </div>
+                    <div>
+                        <select name="modulo" id="modulo" required></select>
+                    </div>
+                    <div>
+                        <select name="tipo_error" id="tipo_error" required></select>
+                    </div>
+                    <div>
+                        <input type="submit" value="Acusar!">
+                    </div>
+                </form>
             </div>
             <div class="arenaPreguntaIndividual">
+                <form action="#" name="preguntar">
+                    <div>
+                        <select name="programador" id="programador2"></select>
+                    </div>
+                    <div>
+                        <select name="modulo" id="modulo2"></select>
+                    </div>
+                    <div>
+                        <select name="tipo_error" id="tipo_error2"></select>
+                    </div>
+                    <div>
+                        <input type="submit" value="Preguntar?">
+                    </div>
+                </form>
             </div>
         </div>
         <div class="arenaCartas">
         </div>
         <div class="arenaAyudas">
+            <button class="btnAyuda">Boton Ayuda</button>
         </div>
     </div>
 
@@ -144,6 +174,7 @@ if(isset($_GET["limpiar"]))
                 mostrar_esconder('.arenaPartida', 'esconder')
         
         }
+        let ventanaEstatica = 0
         function consultaAPI() {
 
             const data = new FormData();
@@ -196,6 +227,50 @@ if(isset($_GET["limpiar"]))
                             let arenaTabla = '<h3>Tabla de cartas: </h3>'
                             arenaTabla += `<div class="tabla-html">${data.frontend.tablas}</div>`
                             document.querySelector('.arenaTabla').innerHTML = arenaTabla
+                            
+                            /* 5. Categorías para los selects */
+                            if(ventanaEstatica == 0){
+                                /* Llenamos el select de programador */
+                                let programador = '<option></option>'
+                                data.frontend.categorias.programador.forEach(function( cadaU ){
+                                    programador += `
+                                    <option value="${cadaU.idcarta}">${cadaU.nombre}</option>
+                                    `
+                                })
+                                document.querySelectorAll('select[name=programador]').forEach(function( cadaSelect ){
+                                    cadaSelect.innerHTML = programador
+                                })
+                                /* Llenamos el select de modulo */
+                                let modulo = '<option></option>'
+                                data.frontend.categorias.modulo.forEach(function( cadaU ){
+                                    modulo += `
+                                    <option value="${cadaU.idcarta}">${cadaU.nombre}</option>
+                                    `
+                                })
+                                document.querySelectorAll('select[name=modulo]').forEach(function( cadaSelect ){
+                                    cadaSelect.innerHTML = modulo
+                                })
+                                /* Llenamos el select de tipo error */
+                                let tipo_error = '<option></option>'
+                                data.frontend.categorias.tipo_error.forEach(function( cadaU ){
+                                    tipo_error += `
+                                    <option value="${cadaU.idcarta}">${cadaU.nombre}</option>
+                                    `
+                                })
+                                document.querySelectorAll('select[name=tipo_error]').forEach(function( cadaSelect ){
+                                    cadaSelect.innerHTML = tipo_error
+                                })
+                            }
+                            /* 6. Cartas del usuario */
+                            if(ventanaEstatica == 0){
+                                let arenaCartas = '<h3>Cartas jugador: </h3>'
+                                arenaCartas += `<div class="carta-${data.frontend.cartas.idcarta1}">${data.frontend.cartas.carta1}</div>`
+                                arenaCartas += `<div class="carta-${data.frontend.cartas.idcarta2}">${data.frontend.cartas.carta2}</div>`
+                                arenaCartas += `<div class="carta-${data.frontend.cartas.idcarta3}">${data.frontend.cartas.carta3}</div>`
+                                arenaCartas += `<div class="carta-${data.frontend.cartas.idcarta4}">${data.frontend.cartas.carta4}</div>`
+                                document.querySelector('.arenaCartas').innerHTML = arenaCartas
+                            }
+                            
                         }
                         const codigos_respuesta = [201, 203] /* Códigos de respuestas de estado de partida */
                         if(codigos_respuesta.includes( data.codigo )){
@@ -208,7 +283,7 @@ if(isset($_GET["limpiar"]))
                             arena_partidas: arena_partidas,
                         };
                         estructuraFrontend(salidaDiseno)
-
+                        ventanaEstatica = 1
                     } else {
                         throw "Error en consulta AJAX";
                     }
@@ -220,6 +295,7 @@ if(isset($_GET["limpiar"]))
                 .catch(function(err) {
                     console.log(err);
                 });
+            
         }
         const Intervalo = setInterval("consultaAPI()", 5000)
         consultaAPI()  // Inicializamos la llamada a la función que se va a ejecutar cada 5 segundos
@@ -249,6 +325,7 @@ if(isset($_GET["limpiar"]))
                     if (data) {
                         /* Analizamos el regreso de data para saber en qué pantalla estamos */
                         return data
+                        consultaAPI()
                     } else {
                         throw "Error en consulta AJAX";
                     }
@@ -262,6 +339,46 @@ if(isset($_GET["limpiar"]))
                 });
         }
 
+        function acusar(datos)
+        {
+            /* Construimos las variables */
+            console.log(datos)
+            const programador = datos.querySelector('select[name=programador]').value
+            const modulo = datos.querySelector('select[name=modulo]').value
+            const tipo_error = datos.querySelector('select[name=tipo_error]').value
+
+            /* Construímos el FormData para envío por post */
+            const data = new FormData();
+            data.append('accion', 'acusarUsuario');
+            data.append('programador', programador);
+            data.append('modulo', modulo);
+            data.append('tipo_error', tipo_error);
+
+            fetch('api/', {
+                    method: 'POST',
+                    body: data
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        /* Analizamos el regreso de data para saber en qué pantalla estamos */
+                        //return data
+                        console.log(data)
+                        consultaAPI()
+                    } else {
+                        throw "Error en consulta AJAX";
+                    }
+
+                })
+                .then(function(texto) {
+                    console.log(texto);
+                })
+                .catch(function(err) { /* Capturo el error, si lo hay */
+                    console.log(err);
+                });
+        
+        }
+
         /* Capturamos los formularios de acceso */
         document.querySelectorAll('.formAcceso').forEach(function(cadaForm){
             cadaForm.addEventListener('submit', function( event ){
@@ -269,6 +386,12 @@ if(isset($_GET["limpiar"]))
                 /* función JS para crear usuario por AJAX */
                 ingresarNuevoUsuario(this)
             })
+        })
+
+        /* Botón de acusación */
+        document.querySelector('form[name=acusacion]').addEventListener('submit', function( event ){
+            event.preventDefault()
+            acusar(this) /* Mandamos a la función la data del form */
         })
     </script>
 
