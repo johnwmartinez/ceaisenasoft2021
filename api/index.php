@@ -64,9 +64,13 @@ if (isset($_POST["accion"])) :
             $partidasecreo = new PartidaSecreto();
             $cartasPartidaSecreto = $partidasecreo->consultarCartasPartida($codigopartida);
 
+            /*Consulto cual es el id del jugador que está haciendo la acusación*/
+            $jugadoracusacion = $jugadores->getJugadorByCodigo($codigo);
+            $idjugadoracusacion = $jugadoracusacion[0]["id_jugador"];
+
             /*Consulto si la acusación es falsa o verdadera*/
             $resultadoacusacion = $partidasecreo->consultaracusacion($post["programador"], 
-                    $post["modulo"], $post["tipo_error"], $cartasPartidaSecreto, $codigopartida);
+                    $post["modulo"], $post["tipo_error"], $cartasPartidaSecreto, $codigopartida, $idjugadoracusacion);
 
             echo $resultadoacusacion;
             //$salida = array(0);

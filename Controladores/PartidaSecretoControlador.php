@@ -8,7 +8,7 @@ class PartidaSecreto extends PartidaSecretoModelo{
     }
 
    public function consultaracusacion($idprogramador, $idmodulo, 
-                $iderror, $cartasPartidaSecreto, $codigopartida){
+                $iderror, $cartasPartidaSecreto, $codigopartida, $idjugadoracusacion){
        
         /*Obtengo las 3 cartas secreto en un array*/
         $cartassecreto = array();
@@ -21,6 +21,9 @@ class PartidaSecreto extends PartidaSecretoModelo{
         $indiceCartaError =  array_search($iderror, $cartassecreto);
 
         if($indiceCartaProgramador != "" && $indiceCartaModulo != ""  && $indiceCartaError != "" ){
+           $partida = new Partidas();
+           $partida->definirPartidaGanadora($idjugadoracusacion,$codigopartida);
+
             return "El jugador ganó la partida";
         }else{
 
