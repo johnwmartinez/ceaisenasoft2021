@@ -73,4 +73,7 @@ class PartidasPreguntasModelo{
         return array(0);
     }
 
+    
+    
+
 }

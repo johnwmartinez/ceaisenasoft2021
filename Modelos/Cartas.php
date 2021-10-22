@@ -45,9 +45,9 @@ class CartasModelo{
                 LEFT JOIN cartas C3 ON C3.idcarta = RPJC.idcarta3
                 LEFT JOIN cartas C4 ON C4.idcarta = RPJC.idcarta4
             WHERE 1=1
-                AND J.codigo LIKE ?
+                AND (J.codigo LIKE ? OR J.id_jugador = ?)
         ";
-        $res = $DB->query( $query , array( $codigo ));
+        $res = $DB->query( $query , array( $codigo, $codigo ));
         return $res[0];
     }
 
