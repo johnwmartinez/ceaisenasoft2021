@@ -19,7 +19,7 @@
         <div>
             <div class="row">
                 <!-- Jugadores -->
-                <div class="col-md-3 padreJ">
+                <div class="col-md-3">
                     <div class="jugador">
                         <div class="foto" style="background-color:orange"></div>
                         <div class="" style="color:orange">Juan</div>
@@ -68,17 +68,17 @@
                         <h2>Ultima pregunta:</h2>
                         <h2>¿Pedro en el modulo nomina error 404?</h2>
                     </div>
+                </div>
                 
             </div>        
-             <!-- Fin Ultima pregunta -->
-                <!--lista -->
+            <!-- Fin Ultima pregunta -->
+            
+
+            <!--lista -->
             <div class="row">
-                <div class="col-md-1 p-0 bA">
-                    <i class="fas fa-angle-double-right activo " title="Abrir lista" onclick=""></i>
-                    <i class="fas fa-angle-double-left inactivo " title="Cerrar lista" onclick=""></i>
-                </div>
-                <div class="row flotante2" style="background-color: #d1c5a3">
-                    <table class="table table-bordered table-hover table-sm tabla">
+            
+                <div class="col-md-4" style="background-color: #d1c5a3">
+                	<table class="table table-bordered table-hover table-sm tabla">
                         <th>Cartas</th>
                         <th>Jugador</th>
                         <tr>
@@ -157,16 +157,135 @@
                             <td>Encoding error</td>
                             <td></td>
                         </tr>
-                    </table>
+                	</table>	
                 </div>
-                <!-- <div class="col-md-8"></div> -->
-            </div>
-                <!-- fin lista -->
-                <!-- Tarjetas -->
-                <div class="row margenT">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <div class="row">
+                
+                <div class="col-md-8" >
+                    <!-- Eleccion preguntar acusar -->
+                        <div class="row elecc">
+                            <div class="col-md-6 ele1">
+                                <h1>Preguntar</h1>
+                            </div>
+                            <div class="col-md-6 ele2">
+                                <h1>Acusar</h1>
+                            </div>
+                        </div>
+                   <!-- Fin eleccion preguntar acusar -->
+                    <div class="row pt-3" style="background-color: #49618f">
+                    	<div id="sobre" class="sobre">
+                			<div class="col pintar2 ele11">
+                				<div class="row">
+		                            <div class="col-md-12 headerP">
+		                                <h2 >Haz tu Pregunta!</h2>
+		                            </div>
+		                        </div>
+		                        <div class="row fotosElec table-responsive">
+
+		                        	<table  class="table table-bordered table-condensed text-white">
+		                        		<thead>
+		                        			<tr>
+		                        				<td colspan="2">Personajes</td>
+		                        				<td colspan="2">Módulos</td>
+		                        				<td colspan="2">Errores</td>
+		                        			</tr>
+		                        		</thead>
+		                        		<tr>
+		                        			<td>
+		                        				<label for="Antonio">
+		                        					<img src="../img/programadores/Antonio.png" title="Antonio" class="imagenE activoP" alt="">
+		                        					<br>
+		                                            Antonio
+		                        				</label>
+		                        			</td>
+		                        			<td>
+		                        				<label for="Carlos">
+		                        					<img src="../img/programadores/Carlos.png" title="Carlos" class="imagenE" alt="">
+		                        					<br>
+		                                            Carlos
+		                        				</label>
+		                        			</td>
+                                            <td>
+                                                <label for="comprobante"><img src="../img/modulos/comprobante_contable.png" title="Comprobante contable" class="imagenE" alt="">
+                                               <br> Comprobante</p>
+                                                
+                                                </label>
+                                            </td>
+                                            <td><br> 
+                                            <label for="contabilidad"><img src="../img/modulos/contabilidad.png" title="Contabilidad" class="imagenE" alt=""></label>
+		                                            <br> Contabilidad</p>
+                                            </td>
+                                            <td>
+                                            <label for="error404"><img src="../img/errores/error404.png" title="Error 404" class="imagenE" alt=""></label>
+		                                            <br> Error 404
+                                            </td>
+                                            <td>
+                                            <label for="memory"><img src="../img/errores/memoryOutOfRange.png" title="Memory Out Of Range" class="imagenE" alt=""></label>
+		                                            <br> Memory Out Of Range
+                                            </td>
+		                        		</tr>
+		                        		<tr>
+                                        <td>
+		                        				<label for="Carolina">
+		                        					<img src="../img/programadores/Carolina.png" title="Carolina" class="imagenE" alt="">
+		                                            <br>
+		                                            Carolina
+		                        				</label>
+		                        			</td>
+		                        			<td>
+		                        				<label for="Juan">
+		                        					<img src="../img/programadores/Juan.png" title="Juan" class="imagenE" alt="">
+		                                            <br>
+		                                            Juan
+		                        				</label>
+		                        			</td>
+		                        			<td><label for="facturacion"><img src="../img/modulos/facturacion.png" title="Facturacion" class="imagenE" alt=""></label>
+		                                           <br>  Facturacion</td>
+		                        			<td><label for="nomina"><img src="../img/modulos/nomina.png" title="Nomina" class="imagenE" alt=""></label>
+		                                           <br>  Nomina</td>
+		                        			<td><label for="null"><img src="../img/errores/nullPointer.png" title="Null Pointer" class="imagenE" alt=""></label>
+		                                            <br> Null Pointer</td>
+		                        			<td><label for="stack"><img src="../img/errores/stackOverflow.png" title="Stack Overflow" class="imagenE" alt=""></label>
+		                                           <br>  Stack Overflow</td>
+		                        		</tr>
+		                        		<tr>
+                                        <td>
+		                        				<label for="Juanita">
+		                        					<img src="../img/programadores/Juanita.png" title="Juanita" class="imagenE" alt="">
+		                                            <br>
+		                                            Juanita
+		                        				</label>
+		                        			</td>
+		                        			<td>
+		                        				<label for="Pedro">
+		                        					<img src="../img/programadores/Pedro.png" title="Pedro" class="imagenE" alt="">
+		                                            <br>
+		                                            Pedro
+		                        				</label>
+		                        			</td>
+		                        			<td><label for="recibo"><img src="../img/modulos/recibo.png" title="Recibo" class="imagenE" alt=""></label>
+		                                            <br> Recibo</td>
+		                        			<td><label for="usuarios"><img src="../img/modulos/usuarios.png" title="Usuarios" class="imagenE" alt=""></label>
+		                                            <br> Usuarios</td>
+		                        			<td><label for="ecoding"><img src="../img/errores/ecodingError.png" title="Ecoding Error" class="imagenE" alt=""></label>
+		                                            <br> Ecoding</td>
+		                        			<td><label for="syntax"><img src="../img/errores/syntaxError.png" title="Syntax Error" class="imagenE" alt=""></label>
+		                                            <br> Syntax error</td>
+		                        		</tr>
+		                        		<tr>
+		                        			<td><label for="Manuel"><img src="../img/programadores/Manuel.png" title="Manuel" class="imagenE" alt="">
+                                            <br>
+                                              Manuel</td>
+                                        
+                                                </label>
+		                        		
+		                        	</table>
+
+
+		                            <div class="d-grid gap-2">
+		                                <label for="submit" class="btn btn-lg btn-success">Aceptar</label>
+		                            </div>
+                                    <div class="row py-3" style="background-color: #407671
+            		">
                         <div class="col-md-3 col-3">
                             <div class="tarjeta">
                                 <img src="../img/programadores/Antonio.png" alt="" class="imageT">
@@ -192,14 +311,21 @@
                             </div>
                         </div>
                     </div>
+		                        </div>    
+		                    </div>
+		                </div>  
+                    </div>
                 </div>
-                <!-- Fin tarjetas -->
-                <!-- Instrucciones -->
-                <div class="col-md-3 p-0 instru">
-                    <i class="fas fa-question activoI " title="Instrucciones" onclick=""></i>
-                </div>
-                <div id="sobre" class="row sobre">
-                <div class="col-md-6 pintar">
+
+            </div>
+                <!-- fin lista -->
+
+
+
+
+
+            <div class="row">
+	            <div class="col-md-6 pintar">
                     <div class="row">
                         <div class="col-md-10">
                             <h2 >Instrucciones</h2>
@@ -243,192 +369,10 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                     </div>
-                </div>
-                <!-- Fin instrucciones -->
-                <!-- Eleccion mi turno -->
-                <div id="sobre" class="row sobre">
-                    <div class="col-md-6 pintar2">
-                        <!-- <div class="row">
-                            <div class="col-md-10">
-                                <h2 >Haz tu eleccion!</h2>
-                            </div>
-                            <div class="col-md-2">
-                                <i class="far fa-times-circle cerrar"></i>
-                            </div>
-                        </div> -->
-                        <div class="row elecc">
-                            <div class="col-md-6 ele1">
-                                <h1>Preguntar</h1>
-                            </div>
-                            <div class="col-md-6 ele2">
-                                <h1>Acusar</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fin eleccion mi turno -->
-                <!-- Hacer pregunta -->
-                <div id="sobre" class="row sobre">
-                    <div class="col-md-6 pintar2 ele11">
-                            
-                            <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="Antonio"><img src="../img/programadores/Antonio.png" title="Antonio" class="imagenE activoP" alt=""></label>
-                                            <p>Antonio</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="Carlos"><img src="../img/programadores/Carlos.png" title="Carlos" class="imagenE" alt=""></label>
-                                            <p>Carlos</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="Carolina"><img src="../img/programadores/Carolina.png" title="Carolina" class="imagenE" alt=""></label>
-                                            <p>Carolina</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="Juan"><img src="../img/programadores/Juan.png" title="Juan" class="imagenE" alt=""></label>
-                                            <p>Juan</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="Juanita"><img src="../img/programadores/Juanita.png" title="Juanita" class="imagenE" alt=""></label>
-                                            <p>Juanita</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="Manuel"><img src="../img/programadores/Manuel.png" title="Manuel" class="imagenE" alt=""></label>
-                                            <p>Manuel</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="Pedro"><img src="../img/programadores/Pedro.png" title="Pedro" class="imagenE" alt=""></label>
-                                            <p>Pedro</p>
-                                        </div>
-                                    </div>     
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="comprobante"><img src="../img/modulos/comprobante_contable.png" title="Comprobante contable" class="imagenE" alt=""></label>
-                                            <p style="margin-top:7px">comprobante</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="contabilidad"><img src="../img/modulos/contabilidad.png" title="Contabilidad" class="imagenE" alt=""></label>
-                                            <p style="font-size:14px;">contabilidad</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="facturacion"><img src="../img/modulos/facturacion.png" title="Facturacion" class="imagenE" alt=""></label>
-                                            <p style="margin-top:7px">facturacion</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="nomina"><img src="../img/modulos/nomina.png" title="Nomina" class="imagenE" alt=""></label>
-                                            <p>nomina</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="recibo"><img src="../img/modulos/recibo.png" title="Recibo" class="imagenE" alt=""></label>
-                                            <p>recibo</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="usuarios"><img src="../img/modulos/usuarios.png" title="Usuarios" class="imagenE" alt=""></label>
-                                            <p>usuarios</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                    <div style="opacity:0">
-                                            <label for=""><img src="../img/modulos/usuarios.png" title="" class="imagenE" alt=""></label>
-                                            <p>usuarios</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>    
-                            <div class="col-md-3">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="ecoding"><img src="../img/errores/ecodingError.png" title="Ecoding Error" class="imagenE" alt=""></label>
-                                            <p>ecoding</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="error404"><img src="../img/errores/error404.png" title="Error 404" class="imagenE" alt=""></label>
-                                            <p>error404</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="memory"><img src="../img/errores/memoryOutOfRange.png" title="Memory Out Of Range" class="imagenE" alt=""></label>
-                                            <p>memory</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="null"><img src="../img/errores/nullPointer.png" title="Null Pointer" class="imagenE" alt=""></label>
-                                            <p>null</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="stack"><img src="../img/errores/stackOverflow.png" title="Stack Overflow" class="imagenE" alt=""></label>
-                                            <p>stack</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <label for="syntax"><img src="../img/errores/syntaxError.png" title="Syntax Error" class="imagenE" alt=""></label>
-                                            <p>syntax</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                    <div style="opacity:0">
-                                            <label for=""><img src="../img/modulos/usuarios.png" title="" class="imagenE" alt=""></label>
-                                            <p>usuarios</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-3">
-                                <label for="submit" class="btn btn-lg btn-success">Aceptar</label>
-                            </div>
-                    </div>
-                </div>                    
-                <!-- Fin Hacer pregunta -->
-            </div>    
+	            </div>
+            </div>
+            
+
         </div>
     </div>
     </div>
