@@ -71,7 +71,8 @@ class JugadoresModelo{
     {
         global $DB;
         
-        $marca_time = time() - 120; /* Vamos a verificar usuariros que tengan más de 120 segundos inactivos */
+        $segundos = 30; /* Cantidad de segundos que dura un usuario inactivo para ser retirado */
+        $marca_time = time() - $segundos; /* Vamos a verificar usuariros que tengan más de 120 segundos inactivos */
         $query = "
             SELECT 
                 RPJC.id_partida id_partida
@@ -104,8 +105,12 @@ class JugadoresModelo{
         
         if(isset($rel[0])):
             /* Query para inactivar en DB */
+            $eliminados = '';
+            foreach($ids_inactivar as $eliminado):
+                $eliminados = ($eliminados == "") ? $eliminado : $eliminados . ', ' .$eliminado;  /* Cada eliminado separado por coma */
+            endforeach;
             $query = "UPDATE rel_partida_jugador_cartas SET activo = 0 WHERE id_jugador IN (?)";
-            $res2 = $DB->query( $query , $ids_inactivar); /* Quedan inactivos del juego */
+            $res2 = $DB->query( $query , array( $eliminados )); /* Quedan inactivos del juego */
             
             if($modifica_partida == 1): /* Hay gente eliminada de esta partida */
                 /* Ahora que los jugadores están inactivos, voy a repartir sus cartas */
@@ -169,6 +174,15 @@ class JugadoresModelo{
             $codigo
          ) );
         return $res; /* Devuelvo array con todos los participantes de la partida */
+    }
+
+    public function consultarCodigoPartidaPorJugador($codigojugador){
+        global $DB;
+
+        global $DB;
+        $query = "SELECT partidas.codigo from jugadores INNER JOIN partidas on partidas.id_partida = jugadores.id_partida WHERE  jugadores.codigo = ? ";
+        $res = $DB->query($query, array( $codigojugador ));
+        return $res[0]["codigo"];
     }
 
 }

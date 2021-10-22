@@ -55,7 +55,38 @@ if (isset($_POST["accion"])) :
                     - si coinciden gana el juego
                     - sino cambia turno e inactiva preguntas
             */
-            $salida = array(0);
+
+            /*Consulto el codigo de la partida con el codigo del jugador*/
+            $jugadores = new Jugadores();
+            $codigopartida = $jugadores-> consultarCodigoPartidaPorJugador($codigo);            
+
+            /*Consulto las cartas de la partida secreto*/
+            $partidasecreo = new PartidaSecreto();
+            $cartasPartidaSecreto = $partidasecreo->consultarCartasPartida($codigopartida);
+
+            /*Consulto si la acusación es falsa o verdadera*/
+            $resultadoacusacion = $partidasecreo->consultaracusacion($post["programador"], 
+                    $post["modulo"], $post["tipo_error"], $cartasPartidaSecreto, $codigopartida);
+
+            echo $resultadoacusacion;
+            //$salida = array(0);
+            //echo (json_encode($salida));
+            break;
+        case "preguntarCartas":
+            $codigo = $_SESSION["codigo"];  /* Código del USUARIO */
+            /* Métodos en la DB para acusar, es decir:
+                - Consultar si cartas coinciden
+                    - si coinciden gana el juego
+                    - sino cambia turno e inactiva preguntas
+            */
+            $datos = array(
+                "codigo" => $codigo,
+                "programador" => $post["programador"],
+                "modulo" => $post["modulo"],
+                "tipo_error" => $post["tipo_error"],
+            );
+            $partidasPreguntas = new PartidasPreguntas();
+            $salida = $partidasPreguntas->preguntar_a_jugadores( $datos );
             echo (json_encode($salida));
             break;
     endswitch;

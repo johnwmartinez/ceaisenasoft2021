@@ -130,13 +130,13 @@ if(isset($_GET["limpiar"]))
             <div class="arenaPreguntaIndividual">
                 <form action="#" name="preguntar">
                     <div>
-                        <select name="programador" id="programador2"></select>
+                        <select name="programador" id="programador2" required></select>
                     </div>
                     <div>
-                        <select name="modulo" id="modulo2"></select>
+                        <select name="modulo" id="modulo2" required></select>
                     </div>
                     <div>
-                        <select name="tipo_error" id="tipo_error2"></select>
+                        <select name="tipo_error" id="tipo_error2" required></select>
                     </div>
                     <div>
                         <input type="submit" value="Preguntar?">
@@ -261,6 +261,13 @@ if(isset($_GET["limpiar"]))
                                     cadaSelect.innerHTML = tipo_error
                                 })
                             }
+
+                            if(data.frontend.turno.turno == data.frontend.turno.yomismo){
+                                document.querySelector('.arenaAtaque').style.display = 'block'
+                            }else{
+                                document.querySelector('.arenaAtaque').style.display = 'none'
+                            }
+
                             /* 6. Cartas del usuario */
                             if(ventanaEstatica == 0){
                                 let arenaCartas = '<h3>Cartas jugador: </h3>'
@@ -270,7 +277,7 @@ if(isset($_GET["limpiar"]))
                                 arenaCartas += `<div class="carta-${data.frontend.cartas.idcarta4}">${data.frontend.cartas.carta4}</div>`
                                 document.querySelector('.arenaCartas').innerHTML = arenaCartas
                             }
-                            
+                            ventanaEstatica = 1
                         }
                         const codigos_respuesta = [201, 203] /* Códigos de respuestas de estado de partida */
                         if(codigos_respuesta.includes( data.codigo )){
@@ -283,7 +290,6 @@ if(isset($_GET["limpiar"]))
                             arena_partidas: arena_partidas,
                         };
                         estructuraFrontend(salidaDiseno)
-                        ventanaEstatica = 1
                     } else {
                         throw "Error en consulta AJAX";
                     }
@@ -339,7 +345,7 @@ if(isset($_GET["limpiar"]))
                 });
         }
 
-        function acusar(datos)
+        function acusar_preguntar(datos, metodo)
         {
             /* Construimos las variables */
             console.log(datos)
@@ -349,7 +355,12 @@ if(isset($_GET["limpiar"]))
 
             /* Construímos el FormData para envío por post */
             const data = new FormData();
-            data.append('accion', 'acusarUsuario');
+            if(metodo == "acusar"){
+                data.append('accion', 'acusarUsuario');
+            }
+            if(metodo == "preguntar"){
+                data.append('accion', 'preguntarCartas');
+            }
             data.append('programador', programador);
             data.append('modulo', modulo);
             data.append('tipo_error', tipo_error);
@@ -391,7 +402,13 @@ if(isset($_GET["limpiar"]))
         /* Botón de acusación */
         document.querySelector('form[name=acusacion]').addEventListener('submit', function( event ){
             event.preventDefault()
-            acusar(this) /* Mandamos a la función la data del form */
+            acusar_preguntar(this, 'acusar') /* Mandamos a la función la data del form */
+        })
+
+        /* Botón de preguntar cartas */
+        document.querySelector('form[name=preguntar]').addEventListener('submit', function( event ){
+            event.preventDefault()
+            acusar_preguntar(this, 'preguntar') /* Mandamos a la función la data del form */
         })
     </script>
 
