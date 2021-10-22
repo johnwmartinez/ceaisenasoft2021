@@ -86,5 +86,19 @@ class PartidaJugadorTablaModelo{
         }
         return $salida; /* retornamos la tabla en arrays */
     }
+
+    public function insertarRegistroTabla($datos){ /* Cada que descubrimos una carta, la insertamos en la DB */
+        global $DB;
+
+        $query = "INSERT INTO rel_partida_jugador_tablas (
+            id_partida, id_jugador, idcarta, poseedor_id
+        ) VALUES ( ?, ?, ?, ? )";
+        $res = $DB->query( $query, array(
+            $datos["id_partida"],
+            $datos["id_jugador"],
+            $datos["idcarta"],
+            $datos["poseedor_id"],
+        ));
+    }
     
 }

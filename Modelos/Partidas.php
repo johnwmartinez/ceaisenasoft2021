@@ -91,9 +91,9 @@ class PartidasModelo{
     public function cambiarTurno($codigo){
 
         global $DB;
-        $query = "SELECT turno FROM partidas WHERE codigo = ? ";
+        $query = "SELECT turno FROM partidas WHERE codigo = ? OR id_partida = ?";
 
-        $res = $DB->query($query, array( $codigo ));
+        $res = $DB->query($query, array( $codigo, $codigo ));
         
         if(isset($res[0]["turno"])){
             if($res[0]["turno"] == 4){ /*Si el turno es el 4, se debe devolver al número 1*/
@@ -103,10 +103,10 @@ class PartidasModelo{
             }
         }
 
-        $query = "UPDATE partidas SET turno = ".$turnoasignar." WHERE codigo LIKE ?";
-        $res = $DB->query($query, array( $codigo ));
+        $query = "UPDATE partidas SET turno = ".$turnoasignar." WHERE (codigo LIKE ? OR id_partida = ?)";
+        $res = $DB->query($query, array( $codigo, $codigo ));
         
     }
-    
+
 
 }
