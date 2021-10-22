@@ -88,23 +88,48 @@ class PartidasModelo{
     3 pasaría a 4
     4 pasaría a 1*/
     /*Recibe como parámetro el codigo de la partida*/
+    public function turno_a_asignar($turno_actual, $turnos_activos, $conteo = NULL){
+        if($turno_actual == 4): /*Si el turno es el 4, se debe devolver al número 1*/
+            $turnoasignar = 1;
+        else:
+            $turnoasignar = $turno_actual + 1; /*De lo contrario le sumo 1 al turno actual*/
+        endif;
+
+        if($conteo == NULL):
+            $conteo = 1;
+        else:
+            $conteo += 1;
+        endif;
+        
+        if($conteo < 6):
+            if(in_array($turnoasignar, $turnos_activos))
+                return $turnoasignar;
+            return $this->turno_a_asignar($turnoasignar, $turnos_activos, $conteo);
+        else:
+            return 0;
+        endif;
+        
+    }
     public function cambiarTurno($codigo){
 
         global $DB;
-        $query = "SELECT turno FROM partidas WHERE codigo = ? OR id_partida = ?";
+        /* Primero traemos los turnos activos */
+        $query = "SELECT * FROM rel_partida_jugador_cartas WHERE id_partida IN ( SELECT id_partida FROM partidas WHERE (codigo LIKE ? OR id_partida = ?) ) AND activo = 1";
+        $res2 = $DB->query( $query , array ( $codigo, $codigo ));
+        $turnos_activos = array();
+        foreach($res2 as $cadaJugador):
+            $turnos_activos[] = $cadaJugador["orden_llegada"];
+        endforeach;
 
+        $query = "SELECT turno FROM partidas WHERE codigo = ? OR id_partida = ?";
         $res = $DB->query($query, array( $codigo, $codigo ));
         
         if(isset($res[0]["turno"])){
-            if($res[0]["turno"] == 4){ /*Si el turno es el 4, se debe devolver al número 1*/
-                $turnoasignar = 1;
-            }else{
-                $turnoasignar = $res[0]["turno"] +1; /*De lo contrario le sumo 1 al turno actual*/
-            }
-        }
+            $turnoasignar = $this->turno_a_asignar($res[0]["turno"], $turnos_activos);
 
-        $query = "UPDATE partidas SET turno = ".$turnoasignar." WHERE (codigo LIKE ? OR id_partida = ?)";
-        $res = $DB->query($query, array( $codigo, $codigo ));
+            $query = "UPDATE partidas SET turno = ".$turnoasignar." WHERE (codigo LIKE ? OR id_partida = ?)";
+            $res = $DB->query($query, array( $codigo, $codigo ));
+        }
         
     }
 
