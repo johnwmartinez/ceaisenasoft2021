@@ -51,5 +51,13 @@ class CartasModelo{
         return $res[0];
     }
 
+    public function consultarCategoriaCarta($idcarta){
+        global $DB;
+        $query = " SELECT categoria FROM cartas WHERE idcarta = ?";
+        $rel = $DB->query($query, array($idcarta));
+
+        return $rel[0]["categoria"];
+    }
+
 
 }

@@ -55,8 +55,22 @@ if (isset($_POST["accion"])) :
                     - si coinciden gana el juego
                     - sino cambia turno e inactiva preguntas
             */
-            $salida = array(0);
-            echo (json_encode($salida));
+
+            /*Consulto el codigo de la partida con el codigo del jugador*/
+            $jugadores = new Jugadores();
+            $codigopartida = $jugadores-> consultarCodigoPartidaPorJugador($codigo);            
+
+            /*Consulto las cartas de la partida secreto*/
+            $partidasecreo = new PartidaSecreto();
+            $cartasPartidaSecreto = $partidasecreo->consultarCartasPartida($codigopartida);
+
+            /*Consulto si la acusación es falsa o verdadera*/
+            $resultadoacusacion = $partidasecreo->consultaracusacion($post["programador"], 
+                    $post["modulo"], $post["tipo_error"], $cartasPartidaSecreto, $codigopartida);
+
+            echo $resultadoacusacion;
+            //$salida = array(0);
+            //echo (json_encode($salida));
             break;
     endswitch;
 endif;

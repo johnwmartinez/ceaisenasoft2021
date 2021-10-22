@@ -171,4 +171,13 @@ class JugadoresModelo{
         return $res; /* Devuelvo array con todos los participantes de la partida */
     }
 
+    public function consultarCodigoPartidaPorJugador($codigojugador){
+        global $DB;
+
+        global $DB;
+        $query = "SELECT partidas.codigo from jugadores INNER JOIN partidas on partidas.id_partida = jugadores.id_partida WHERE  jugadores.codigo = ? ";
+        $res = $DB->query($query, array( $codigojugador ));
+        return $res[0]["codigo"];
+    }
+
 }
