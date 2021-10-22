@@ -279,7 +279,19 @@ if(isset($_GET["limpiar"]))
                             }
                             ventanaEstatica = 1
                         }
-                        const codigos_respuesta = [201, 203] /* Códigos de respuestas de estado de partida */
+                        if(data.codigo == 203){
+                            const salida = `
+                                ${data.mensaje}
+                                <a href="#" class="reiniciar_partida">Reiniciar partida</a>
+                            `;
+                            document.querySelector('.arena_pruebas').innerHTML = salida
+                            document.querySelector('.reiniciar_partida').addEventListener('click', function( event ){
+                                event.preventDefault()
+                                reiniciar_partida()
+                            })
+
+                        }
+                        const codigos_respuesta = [201] /* Códigos de respuestas de estado de partida */
                         if(codigos_respuesta.includes( data.codigo )){
                             document.querySelector('.arena_pruebas').innerHTML = data.mensaje
                         }
@@ -380,6 +392,33 @@ if(isset($_GET["limpiar"]))
                         throw "Error en consulta AJAX";
                     }
 
+                })
+                .then(function(texto) {
+                    console.log(texto);
+                })
+                .catch(function(err) { /* Capturo el error, si lo hay */
+                    console.log(err);
+                });
+        
+        }
+
+        function reiniciar_partida()
+        {
+
+            /* Construímos el FormData para envío por post */
+            const data = new FormData();
+            data.append('accion', 'reiniciarJuego');
+            fetch('api/', {
+                    method: 'POST',
+                    body: data
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        consultaAPI()
+                    } else {
+                        throw "Error en consulta AJAX";
+                    }
                 })
                 .then(function(texto) {
                     console.log(texto);

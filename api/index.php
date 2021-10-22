@@ -93,6 +93,9 @@ if (isset($_POST["accion"])) :
             $salida = $partidasPreguntas->preguntar_a_jugadores( $datos );
             echo (json_encode($salida));
             break;
+        case "reiniciarJuego":
+            unset($_SESSION["codigo"]);
+            break;
     endswitch;
 endif;
 
